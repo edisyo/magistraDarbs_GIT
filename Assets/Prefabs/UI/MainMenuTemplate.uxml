@@ -1,3 +1,11 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" ml="UnityEditor.XR.MagicLeap" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <ui:Button text="text" display-tooltip-when-elided="true" name="PhotoCredit" />
+    <Style src="/Assets/UI Toolkit/Styles/main-menu-button-style.uss" />
+    <ui:VisualElement name="Background" style="flex-grow: 1; background-color: rgba(0, 0, 0, 0); align-items: center; justify-content: center;">
+        <ui:VisualElement name="mainMenuPanel" style="height: 932px; width: 677px; background-color: rgb(67, 67, 67); border-top-left-radius: 30px; border-bottom-left-radius: 30px; border-top-right-radius: 30px; border-bottom-right-radius: 30px; justify-content: center; align-items: center;">
+            <ui:Label text="Izvēlies skenēšanas veidu!" display-tooltip-when-elided="true" name="txt_mainMenu" style="height: 197px; width: 595px; font-size: 63px; color: rgb(162, 168, 246); flex-wrap: nowrap; flex-direction: column; justify-content: center; align-items: center; white-space: normal; -unity-text-align: upper-center; top: auto; position: relative; -unity-font-style: bold; bottom: 29px;" />
+            <ui:Button text="2D SKENĒŠANA" display-tooltip-when-elided="true" name="2dButton" class="button-style" style="-unity-slice-left: 0; -unity-slice-top: 0; -unity-slice-right: 0; -unity-slice-bottom: 0;" />
+            <ui:Button text="3D SKENĒŠANA" display-tooltip-when-elided="true" name="3dButton" class="button-style" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:Button text="IZIET" display-tooltip-when-elided="true" name="exitButton" class="exit-button" />
 </ui:UXML>

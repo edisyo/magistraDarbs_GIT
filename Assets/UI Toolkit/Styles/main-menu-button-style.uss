@@ -1,0 +1,138 @@
+.button-style {
+    height: 209px;
+    width: 497px;
+    white-space: normal;
+    background-color: rgba(175, 222, 235, 255);
+    color: rgba(77, 77, 77, 255);
+    border-left-color: rgba(255, 255, 255, 255);
+    border-right-color: rgba(255, 255, 255, 255);
+    border-top-color: rgba(255, 255, 255, 255);
+    border-bottom-color: rgba(255, 255, 255, 255);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    -unity-font-style: bold;
+    font-size: 50px;
+    -unity-text-align: middle-center;
+    -unity-text-outline-width: 0;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.button-style:hover {
+    height: 209px;
+    width: 497px;
+    white-space: normal;
+    background-color: rgb(118, 216, 243);
+    color: rgb(77, 77, 77);
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    -unity-font-style: bold;
+    font-size: 50px;
+    -unity-text-align: middle-center;
+    -unity-text-outline-width: 0;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.button-style:active {
+    height: 209px;
+    width: 497px;
+    white-space: normal;
+    background-color: rgb(162, 168, 246);
+    color: rgb(67, 67, 67);
+    border-left-color: rgb(255, 255, 255);
+    border-right-color: rgb(255, 255, 255);
+    border-top-color: rgb(255, 255, 255);
+    border-bottom-color: rgb(255, 255, 255);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    -unity-font-style: bold;
+    font-size: 50px;
+    -unity-text-align: middle-center;
+    -unity-text-outline-width: 0;
+    margin-left: 40px;
+    margin-right: 40px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.exit-button {
+    justify-content: flex-start;
+    width: 50%;
+    height: 5%;
+    position: absolute;
+    left: 25%;
+    bottom: 5%;
+    -unity-font-style: bold;
+    font-size: 55px;
+    background-color: rgba(188, 188, 188, 0);
+    color: rgb(67, 67, 67);
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+}
+
+.exit-button:hover {
+    justify-content: flex-start;
+    width: 50%;
+    height: 5%;
+    position: absolute;
+    left: 25%;
+    bottom: 5%;
+    -unity-font-style: bold;
+    font-size: 55px;
+    background-color: rgba(255, 255, 255, 0.19);
+    color: rgb(67, 67, 67);
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.exit-button:active {
+    justify-content: flex-start;
+    width: 50%;
+    height: 5%;
+    position: absolute;
+    left: 25%;
+    bottom: 5%;
+    -unity-font-style: bold;
+    font-size: 55px;
+    background-color: rgba(67, 67, 67, 0.5);
+    color: rgb(162, 168, 246);
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
