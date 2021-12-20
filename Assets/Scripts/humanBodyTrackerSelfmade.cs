@@ -1,0 +1,159 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
+using TMPro;
+using UnityEngine.XR.ARFoundation.Samples;
+
+public class humanBodyTrackerSelfmade : MonoBehaviour
+{
+    public boneToTrack[] bonesToTrack;
+    public TextMeshProUGUI debugText;
+    private GameObject leftArm;
+    private GameObject rightArm;
+
+    public LineRenderer line;
+
+    [SerializeField]
+    [Tooltip("The Skeleton prefab to be controlled.")]
+    GameObject m_SkeletonPrefab;
+
+    [SerializeField]
+    [Tooltip("The ARHumanBodyManager which will produce body tracking events.")]
+    ARHumanBodyManager m_HumanBodyManager;
+
+    /// <summary>
+    /// Get/Set the <c>ARHumanBodyManager</c>.
+    /// </summary>
+    public ARHumanBodyManager humanBodyManager
+    {
+        get { return m_HumanBodyManager; }
+        set { m_HumanBodyManager = value; }
+    }
+
+    /// <summary>
+    /// Get/Set the skeleton prefab.
+    /// </summary>
+    public GameObject skeletonPrefab
+    {
+        get { return m_SkeletonPrefab; }
+        set { m_SkeletonPrefab = value; }
+    }
+
+    Dictionary<TrackableId, BoneController> m_SkeletonTracker = new Dictionary<TrackableId, BoneController>();
+
+    void OnEnable()
+    {
+
+        humanBodyManager.humanBodiesChanged += OnHumanBodiesChanged;
+        
+    }
+
+    void OnDisable()
+    {
+        if (humanBodyManager != null)
+            humanBodyManager.humanBodiesChanged -= OnHumanBodiesChanged;
+        
+    }
+
+    private void Start()
+    {
+        debugText.text = $"Looking for a body... \n";
+        line.gameObject.SetActive(false);
+    }
+
+    void OnHumanBodiesChanged(ARHumanBodiesChangedEventArgs eventArgs)
+    {
+        BoneController boneController;
+
+        foreach (var humanBody in eventArgs.added)
+        {
+            if (!m_SkeletonTracker.TryGetValue(humanBody.trackableId, out boneController))
+            {
+                //Debug.Log($"Adding a new skeleton [{humanBody.trackableId}].");
+                var newSkeletonGO = Instantiate(skeletonPrefab, humanBody.transform);
+
+                if (bonesToTrack == null)
+                {
+                    //bonesToTrack = boneController.GetComponentInChildren<boneToTrack>();
+                    //debugText.text = "" + bonesToTrack.gameObject.name;
+
+                    bonesToTrack = boneController.skeletonRoot.GetComponentsInChildren<boneToTrack>();
+                    foreach (boneToTrack boneToTrack in bonesToTrack)
+                    {
+                        debugText.text += "Added Bone: " + boneToTrack.transform.parent.name;
+                    }
+                }
+
+                boneController = newSkeletonGO.GetComponent<BoneController>();
+                m_SkeletonTracker.Add(humanBody.trackableId, boneController);
+            }
+
+            boneController.InitializeSkeletonJoints();
+            boneController.ApplyBodyPose(humanBody);
+        }
+
+        foreach (var humanBody in eventArgs.updated)
+        {
+            if (m_SkeletonTracker.TryGetValue(humanBody.trackableId, out boneController))
+            {
+                boneController.ApplyBodyPose(humanBody);
+            }
+
+            if (bonesToTrack != null)
+            {
+                //bonesToTrack = boneController.GetComponentInChildren<boneToTrack>();
+                //debugText.text = "" + bonesToTrack.gameObject.name;
+
+                bonesToTrack = boneController.skeletonRoot.GetComponentsInChildren<boneToTrack>();
+                checkAngles(bonesToTrack);
+                //foreach (boneToTrack boneToTrack in bonesToTrack)
+                //{
+                //    debugText.text = $"Updated Bone: {boneToTrack.transform.parent.name} \n";
+                //}
+            }
+
+                    
+        }
+
+        foreach (var humanBody in eventArgs.removed)
+        {
+            //Debug.Log($"Removing a skeleton [{humanBody.trackableId}].");
+            if (m_SkeletonTracker.TryGetValue(humanBody.trackableId, out boneController))
+            {
+                Destroy(boneController.gameObject);
+                m_SkeletonTracker.Remove(humanBody.trackableId);
+            }
+
+            rightArm.GetComponent<Renderer>().material.color = Color.white;
+            leftArm.GetComponent<Renderer>().material.color = Color.white;
+            line.gameObject.SetActive(false);
+        }
+    }
+
+    private void checkAngles(boneToTrack[] bones)
+    {
+        foreach (boneToTrack bone in bones)
+        {
+            if (bone.transform.parent.name == "LeftArm")
+                leftArm = bone.gameObject;
+            if (bone.transform.parent.name == "RightArm")
+                rightArm = bone.gameObject;
+        }
+
+        //debugText.text = $" Bone 1: {leftArm} and Bone 2: {rightArm} \n";
+        rightArm.GetComponent<Renderer>().material.color = Color.green;
+        leftArm.GetComponent<Renderer>().material.color = Color.green;
+
+        var direction = rightArm.transform.position - leftArm.transform.position;
+        var up = transform.up;
+        var angle = Vector3.Angle(up,direction);
+
+        line.gameObject.SetActive(true);
+        line.SetPosition(0, leftArm.transform.position);
+        line.SetPosition(1, rightArm.transform.position);
+
+        debugText.text = "ANGLE: " + (angle - 90).ToString("F1");
+    }
+}
