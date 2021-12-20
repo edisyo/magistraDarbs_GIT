@@ -6,9 +6,9 @@ using UnityEngine.UIElements;
 
 public class buttonScripts : MonoBehaviour
 {
-    private Button btn_2d;
-    private Button btn_3d;
-    private Button btn_exit;
+    public Button btn_2d;
+    public Button btn_3d;
+    public Button btn_exit;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +18,11 @@ public class buttonScripts : MonoBehaviour
         btn_2d = root.Q<Button>("2dButton");
         btn_3d = root.Q<Button>("3dButton");
         btn_exit = root.Q<Button>("exitButton");
+
+        //assign functions when buttons are clicked
+        btn_2d.clicked += Button2DPressed;
+        btn_3d.clicked += Button3DPressed;
+        btn_exit.clicked += ButtonExitPressed;
     }
 
     // Update is called once per frame
@@ -29,16 +34,19 @@ public class buttonScripts : MonoBehaviour
     public void LoadScene(string sceneNameToGoBack)
     {
         SceneManager.LoadScene(sceneNameToGoBack, LoadSceneMode.Single);
+        Debug.Log("Pressed Exit");
     }
 
     public void Button2DPressed()
     {
         SceneManager.LoadScene("2D_bodyTracking", LoadSceneMode.Single);
+        Debug.Log("Loading 2d body tracking...");
     }
 
     public void Button3DPressed()
     {
         SceneManager.LoadScene("3D_bodyTracking", LoadSceneMode.Single);
+        Debug.Log("Loading 3d body tracking...");
     }
 
     public void ButtonExitPressed()
