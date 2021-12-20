@@ -20,9 +20,16 @@ public class buttonScripts : MonoBehaviour
         btn_exit = root.Q<Button>("exitButton");
 
         //assign functions when buttons are clicked
-        btn_2d.clicked += Button2DPressed;
-        btn_3d.clicked += Button3DPressed;
-        btn_exit.clicked += ButtonExitPressed;
+        if(btn_2d != null && btn_3d != null && btn_exit != null)
+        {
+            btn_2d.clicked += Button2DPressed;
+            btn_3d.clicked += Button3DPressed;
+            btn_exit.clicked += ButtonExitPressed;
+        }else
+        {
+            Debug.LogError("Missing UI Buttons, check if naming is correct..");
+        }
+        
     }
 
     // Update is called once per frame
