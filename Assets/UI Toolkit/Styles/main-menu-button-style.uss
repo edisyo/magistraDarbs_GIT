@@ -2,8 +2,8 @@
     height: 209px;
     width: 497px;
     white-space: normal;
-    background-color: rgba(175, 222, 235, 255);
-    color: rgba(77, 77, 77, 255);
+    background-color: rgba(111, 111, 111, 255);
+    color: rgba(197, 197, 197, 255);
     border-left-color: rgba(255, 255, 255, 255);
     border-right-color: rgba(255, 255, 255, 255);
     border-top-color: rgba(255, 255, 255, 255);
@@ -58,7 +58,7 @@
     height: 209px;
     width: 497px;
     white-space: normal;
-    background-color: rgb(162, 168, 246);
+    background-color: rgb(81, 208, 243);
     color: rgb(67, 67, 67);
     border-left-color: rgb(255, 255, 255);
     border-right-color: rgb(255, 255, 255);
@@ -73,7 +73,7 @@
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;
     -unity-font-style: bold;
-    font-size: 50px;
+    font-size: 52px;
     -unity-text-align: middle-center;
     -unity-text-outline-width: 0;
     margin-left: 40px;
@@ -112,8 +112,8 @@
     bottom: 5%;
     -unity-font-style: bold;
     font-size: 55px;
-    background-color: rgba(255, 255, 255, 0.19);
-    color: rgb(67, 67, 67);
+    background-color: rgba(67, 67, 67, 0.56);
+    color: rgb(121, 226, 255);
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
     border-top-right-radius: 30px;
@@ -128,9 +128,9 @@
     left: 25%;
     bottom: 5%;
     -unity-font-style: bold;
-    font-size: 55px;
-    background-color: rgba(67, 67, 67, 0.5);
-    color: rgb(162, 168, 246);
+    font-size: 60px;
+    background-color: rgba(67, 67, 67, 0.72);
+    color: rgb(66, 214, 255);
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
     border-top-right-radius: 30px;
