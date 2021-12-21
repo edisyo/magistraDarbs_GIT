@@ -10,14 +10,24 @@ public class buttonScripts : MonoBehaviour
     public Button btn_3d;
     public Button btn_exit;
 
+    private VisualElement root;
+
     // Start is called before the first frame update
     void Start()
     {
-        var root = GetComponent<UIDocument>().rootVisualElement;
-
-        btn_2d = root.Q<Button>("2dButton");
-        btn_3d = root.Q<Button>("3dButton");
-        btn_exit = root.Q<Button>("exitButton");
+        if(transform.GetComponent<UIDocument>() != null)
+        {
+            root = GetComponent<UIDocument>().rootVisualElement;
+        }
+            
+        
+        if(root != null)
+        {
+            btn_2d = root.Q<Button>("2dButton");
+            btn_3d = root.Q<Button>("3dButton");
+            btn_exit = root.Q<Button>("exitButton");
+        }
+        
 
         //assign functions when buttons are clicked
         if(btn_2d != null && btn_3d != null && btn_exit != null)
@@ -27,7 +37,7 @@ public class buttonScripts : MonoBehaviour
             btn_exit.clicked += ButtonExitPressed;
         }else
         {
-            Debug.LogError("Missing UI Buttons, check if naming is correct..");
+            Debug.LogWarning("Missing UI Buttons, check if naming is correct..");
         }
         
     }
@@ -38,9 +48,9 @@ public class buttonScripts : MonoBehaviour
         
     }
 
-    public void LoadScene(string sceneNameToGoBack)
+    public void LoadScene(string sceneNameToGoTo)
     {
-        SceneManager.LoadScene(sceneNameToGoBack, LoadSceneMode.Single);
+        SceneManager.LoadScene(sceneNameToGoTo, LoadSceneMode.Single);
         Debug.Log("Pressed Exit");
     }
 
