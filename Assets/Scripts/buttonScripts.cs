@@ -85,7 +85,7 @@ public class buttonScripts : MonoBehaviour
     public void takePhoto()
     {
         PhotoLogic photoLogic = FindObjectOfType<PhotoLogic>();
-        //XRCpuImage image = photoLogic.takePhoto();
+        //XRCpuImage image = photoLogic.XRtakePhoto();
     }
 
     public void ButtonExitPressed()
