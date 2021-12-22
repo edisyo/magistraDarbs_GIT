@@ -13,7 +13,7 @@ public class PhotoLogic : MonoBehaviour
     Texture2D m_CameraTexture;
 
 
-    public Image screenshotImage;
+    private Image screenshotImage;
     public GameObject screenShotGameObject;
     public TextMeshProUGUI debugText;
     
@@ -50,37 +50,41 @@ public class PhotoLogic : MonoBehaviour
 
     public void takePhoto()
     {
-        Debug.Log("Taking a photo...");
-        if(!cameraManager.TryAcquireLatestCpuImage(out XRCpuImage image))
-            return;
+        // if(!cameraManager.TryAcquireLatestCpuImage(out XRCpuImage image))
+        //     return;
         
         
         // Consider each image plane.
-        for (int planeIndex = 0; planeIndex < image.planeCount; ++planeIndex)
-        {
+        // for (int planeIndex = 0; planeIndex < image.planeCount; ++planeIndex)
+        // {
             // Log information about the image plane.
-            var plane = image.GetPlane(planeIndex);
-            Debug.LogFormat("Plane {0}:\n\tsize: {1}\n\trowStride: {2}\n\tpixelStride: {3}",
-            planeIndex, plane.data.Length, plane.rowStride, plane.pixelStride);
+        //     var plane = image.GetPlane(planeIndex);
+        //     Debug.LogFormat("Plane {0}:\n\tsize: {1}\n\trowStride: {2}\n\tpixelStride: {3}",
+        //     planeIndex, plane.data.Length, plane.rowStride, plane.pixelStride);
 
-            //debugText.text = "Plane " + planeIndex + "\n tsize: " +plane.data.Length + " \n\trowStride: " + 
-                //plane.rowStride + "\n\tpixelStride: {3}" + plane.pixelStride;
-            // Do something with the data.
-            //MyComputerVisionAlgorithm(plane.data);
-            //screenshotImage = image;
+        //     //debugText.text = "Plane " + planeIndex + "\n tsize: " +plane.data.Length + " \n\trowStride: " + 
+        //         //plane.rowStride + "\n\tpixelStride: {3}" + plane.pixelStride;
+        //     // Do something with the data.
+        //     //MyComputerVisionAlgorithm(plane.data);
+        //     //screenshotImage = image;
 
-        }
+        // }
 
-        var format = TextureFormat.RGBA32;
-        Rect screenSize = new Rect(0,0, image.width, image.height);
-        m_CameraTexture = new Texture2D(image.width, image.height, format, false);
-        //screenshotImage = screenshotGameObject.GetComponent<Image>();
-        //Sprite.Create(m_CameraTexture, screenSize, new Vector2(0.5f, 0.5f));
-        screenshotImage.sprite = Sprite.Create(m_CameraTexture, new Rect(0f, 0f, image.width, image.height), new Vector2(0.5f,0.5f));
-        screenShotGameObject.GetComponent<Image>().sprite = screenshotImage.sprite;
+        // var format = TextureFormat.RGBA32;
+        // Rect screenSize = new Rect(0,0, image.width, image.height);
+        // m_CameraTexture = new Texture2D(image.width, image.height, format, false);
+        // //screenshotImage = screenshotGameObject.GetComponent<Image>();
+        // //Sprite.Create(m_CameraTexture, screenSize, new Vector2(0.5f, 0.5f));
+        // screenshotImage.sprite = Sprite.Create(m_CameraTexture, new Rect(0f, 0f, image.width, image.height), new Vector2(0.5f,0.5f));
+        //screenShotGameObject.GetComponent<Image>().sprite = screenshotImage.sprite;
+
+        var tex2D = ScreenCapture.CaptureScreenshotAsTexture();
+        Rect screenSize = new Rect(0,0, Screen.width, Screen.height);
+        Sprite newSprite = Sprite.Create(tex2D, screenSize, Vector2.zero);
+
+        screenShotGameObject.GetComponent<Image>().sprite = newSprite;
         screenShotGameObject.SetActive(true);
-        
-        debugText.text += "screenshotImage: " + screenshotImage;
+        debugText.text += "tex2d: " + tex2D + "\n newSprite: " + newSprite;
         
         // Dispose the XRCpuImage to avoid resource leaks.
         //image.Dispose();
