@@ -538,7 +538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8da6608ef4b22044b07257fc7ccff48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenshotGameObject: {fileID: 450830280}
+  screenShotGameObject: {fileID: 450830280}
   debugText: {fileID: 1724698917}
 --- !u!1 &1032446107
 GameObject:

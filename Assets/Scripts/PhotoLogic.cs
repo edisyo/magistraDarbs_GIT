@@ -40,10 +40,11 @@ public class PhotoLogic : MonoBehaviour
         if(screenshotImage == null)
         {
             debugText.text = "Not found yet...";
-        }else
-        {
-            debugText.text = "" + screenshotImage.image;
         }
+        //else
+        // {
+        //     debugText.text = "" + screenshotImage.image;
+        // }
         
     }
 
@@ -79,6 +80,7 @@ public class PhotoLogic : MonoBehaviour
         screenShotGameObject.GetComponent<Image>().sprite = screenshotImage.sprite;
         screenShotGameObject.SetActive(true);
         
+        debugText.text += "screenshotImage: " + screenshotImage;
         
         // Dispose the XRCpuImage to avoid resource leaks.
         //image.Dispose();
