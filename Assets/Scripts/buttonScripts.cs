@@ -85,6 +85,7 @@ public class buttonScripts : MonoBehaviour
     public void takePhoto()
     {
         PhotoLogic photoLogic = FindObjectOfType<PhotoLogic>();
+        photoLogic.takePhoto();
         //XRCpuImage image = photoLogic.XRtakePhoto();
     }
 
