@@ -11,7 +11,7 @@ public class PhotoLogic : MonoBehaviour
     ARCameraManager cameraManager;
     ARCameraBackground m_ARCameraBackground;
     Texture2D m_CameraTexture;
-    Image screenshotImage;
+    Texture screenshotImage;
     
 
     public GameObject screenshotGameObject;
@@ -31,16 +31,25 @@ public class PhotoLogic : MonoBehaviour
             Debug.Log("Camera Background Found");
 
         screenshotGameObject.SetActive(false);
+        
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        debugText.text = "" + screenshotGameObject.GetComponent<Image>().image;
+        screenshotImage = screenshotGameObject.GetComponent<Image>().image;
+        if(screenshotImage == null)
+        {
+            debugText.text = "Not found yet...";
+        }else
+        {
+            debugText.text = "" + screenshotGameObject.GetComponent<Image>().image;
+        }
+        
     }
 
-    public void XRtakePhoto()
+    public void takePhoto()
     {
         Debug.Log("Taking a photo...");
         if(!cameraManager.TryAcquireLatestCpuImage(out XRCpuImage image))
@@ -66,9 +75,10 @@ public class PhotoLogic : MonoBehaviour
         var format = TextureFormat.RGBA32;
         Rect screenSize = new Rect(0,0, image.width, image.height);
         m_CameraTexture = new Texture2D(image.width, image.height, format, false);
-        screenshotImage = screenshotGameObject.GetComponent<Image>();
+        //screenshotImage = screenshotGameObject.GetComponent<Image>();
         //Sprite.Create(m_CameraTexture, screenSize, new Vector2(0.5f, 0.5f));
-        screenshotImage.image = m_CameraTexture;
+        screenshotImage = m_CameraTexture;
+        
         screenshotGameObject.SetActive(true);
         
         
