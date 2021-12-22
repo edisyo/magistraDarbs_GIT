@@ -16,7 +16,7 @@ public class PhotoLogic : MonoBehaviour
 
 
     private UnityEngine.UI.Image screenshotImage;
-    public GameObject screenShotGameObject;
+    public RawImage screenshotUI_img;
     public TextMeshProUGUI debugText;
     
 
@@ -68,15 +68,15 @@ public class PhotoLogic : MonoBehaviour
         texture.ReadPixels(new Rect(0,0,Screen.width, Screen.height), 0, 0);
         texture.Apply();
 
-        string name = "Screenshot_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".png";
+        //string name = "Screenshot_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".png";
 
         //PC
-        byte[] bytes = texture.EncodeToPNG();
-        File.WriteAllBytes(Application.dataPath + "/ScreenshotFolder/" + name, bytes);
+        //byte[] bytes = texture.EncodeToPNG();
+        //File.WriteAllBytes(Application.dataPath + "/ScreenshotFolder/" + name, bytes);
 
         debugText.text = "Saved a pic: ";
 
-        screenShotGameObject.GetComponent<RawImage>().texture = texture;
+        screenshotUI_img.texture = texture;
 
         Destroy(texture);
 
