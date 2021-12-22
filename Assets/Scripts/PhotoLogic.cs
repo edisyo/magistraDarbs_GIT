@@ -11,10 +11,10 @@ public class PhotoLogic : MonoBehaviour
     ARCameraManager cameraManager;
     ARCameraBackground m_ARCameraBackground;
     Texture2D m_CameraTexture;
-    Texture screenshotImage;
-    
 
-    public GameObject screenshotGameObject;
+
+    public Image screenshotImage;
+    public GameObject screenShotGameObject;
     public TextMeshProUGUI debugText;
     
 
@@ -29,22 +29,20 @@ public class PhotoLogic : MonoBehaviour
         
         if(m_ARCameraBackground != null)
             Debug.Log("Camera Background Found");
-
-        screenshotGameObject.SetActive(false);
         
-
+        screenShotGameObject.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        screenshotImage = screenshotGameObject.GetComponent<Image>().image;
+        //screenshotImage = screenshotGameObject.GetComponent<Image>();
         if(screenshotImage == null)
         {
             debugText.text = "Not found yet...";
         }else
         {
-            debugText.text = "" + screenshotGameObject.GetComponent<Image>().image;
+            debugText.text = "" + screenshotImage.image;
         }
         
     }
@@ -77,9 +75,9 @@ public class PhotoLogic : MonoBehaviour
         m_CameraTexture = new Texture2D(image.width, image.height, format, false);
         //screenshotImage = screenshotGameObject.GetComponent<Image>();
         //Sprite.Create(m_CameraTexture, screenSize, new Vector2(0.5f, 0.5f));
-        screenshotImage = m_CameraTexture;
-        
-        screenshotGameObject.SetActive(true);
+        screenshotImage.sprite = Sprite.Create(m_CameraTexture, new Rect(0f, 0f, image.width, image.height), new Vector2(0.5f,0.5f));
+        screenShotGameObject.GetComponent<Image>().sprite = screenshotImage.sprite;
+        screenShotGameObject.SetActive(true);
         
         
         // Dispose the XRCpuImage to avoid resource leaks.
