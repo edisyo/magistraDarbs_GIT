@@ -1,10 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
-<engine:UXML
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:engine="UnityEngine.UIElements"
-    xmlns:editor="UnityEditor.UIElements"
-    xmlns:ml="UnityEditor.XR.MagicLeap"
-    xsi:noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd"
->
-    
-</engine:UXML>
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" ml="UnityEditor.XR.MagicLeap" noNamespaceSchemaLocation="../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="/Assets/UI Toolkit/Styles/2d-scene.uss" />
+    <ui:VisualElement name="Background" style="flex-grow: 1; justify-content: flex-end; align-items: center; border-left-color: rgba(0, 0, 0, 0); border-right-color: rgba(0, 0, 0, 0); border-top-color: rgba(0, 0, 0, 0); border-bottom-color: rgba(0, 0, 0, 0);">
+        <ui:IMGUIContainer name="TookedPhoto" style="width: 100%; height: 100%; flex-grow: 1; flex-shrink: 1; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;" />
+        <ui:Button text="Uzņemt foto" display-tooltip-when-elided="true" name="takePhoto_button" class="take-photo-button" style="flex-basis: auto; opacity: 1; border-left-width: 11px; border-right-width: 11px; border-top-width: 11px; border-bottom-width: 11px;" />
+    </ui:VisualElement>
+</ui:UXML>
