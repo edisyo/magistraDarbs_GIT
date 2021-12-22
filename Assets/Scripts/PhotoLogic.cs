@@ -5,6 +5,7 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 using UnityEngine.UIElements;
 using TMPro;
+using System.IO;
 
 public class PhotoLogic : MonoBehaviour
 {
@@ -36,57 +37,44 @@ public class PhotoLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //screenshotImage = screenshotGameObject.GetComponent<Image>();
-        if(screenshotImage == null)
-        {
-            debugText.text = "Not found yet...";
-        }
-        //else
-        // {
-        //     debugText.text = "" + screenshotImage.image;
-        // }
         
     }
 
     public void takePhoto()
     {
-        // if(!cameraManager.TryAcquireLatestCpuImage(out XRCpuImage image))
-        //     return;
-        
-        
-        // Consider each image plane.
-        // for (int planeIndex = 0; planeIndex < image.planeCount; ++planeIndex)
-        // {
-            // Log information about the image plane.
-        //     var plane = image.GetPlane(planeIndex);
-        //     Debug.LogFormat("Plane {0}:\n\tsize: {1}\n\trowStride: {2}\n\tpixelStride: {3}",
-        //     planeIndex, plane.data.Length, plane.rowStride, plane.pixelStride);
+        // var tex2D = ScreenCapture.CaptureScreenshotAsTexture();
+        // Rect screenSize = new Rect(0,0, Screen.width, Screen.height);
+        // Sprite newSprite = Sprite.Create(tex2D, screenSize, Vector2.zero);
 
-        //     //debugText.text = "Plane " + planeIndex + "\n tsize: " +plane.data.Length + " \n\trowStride: " + 
-        //         //plane.rowStride + "\n\tpixelStride: {3}" + plane.pixelStride;
-        //     // Do something with the data.
-        //     //MyComputerVisionAlgorithm(plane.data);
-        //     //screenshotImage = image;
+        // screenShotGameObject.GetComponent<Image>().sprite = newSprite;
+        // screenShotGameObject.SetActive(true);
+        // debugText.text += "tex2d: " + tex2D + "\n newSprite: " + newSprite;
 
-        // }
-
-        // var format = TextureFormat.RGBA32;
-        // Rect screenSize = new Rect(0,0, image.width, image.height);
-        // m_CameraTexture = new Texture2D(image.width, image.height, format, false);
-        // //screenshotImage = screenshotGameObject.GetComponent<Image>();
-        // //Sprite.Create(m_CameraTexture, screenSize, new Vector2(0.5f, 0.5f));
-        // screenshotImage.sprite = Sprite.Create(m_CameraTexture, new Rect(0f, 0f, image.width, image.height), new Vector2(0.5f,0.5f));
-        //screenShotGameObject.GetComponent<Image>().sprite = screenshotImage.sprite;
-
-        var tex2D = ScreenCapture.CaptureScreenshotAsTexture();
-        Rect screenSize = new Rect(0,0, Screen.width, Screen.height);
-        Sprite newSprite = Sprite.Create(tex2D, screenSize, Vector2.zero);
-
-        screenShotGameObject.GetComponent<Image>().sprite = newSprite;
-        screenShotGameObject.SetActive(true);
-        debugText.text += "tex2d: " + tex2D + "\n newSprite: " + newSprite;
+        // //cleanup
+        // Object.Destroy(tex2D);
         
         // Dispose the XRCpuImage to avoid resource leaks.
         //image.Dispose();
+
+        StartCoroutine("Screenshot");
+    }
+
+    private IEnumerator Screenshot()
+    {
+        yield return new WaitForEndOfFrame();
+        Texture2D texture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
+
+        texture.ReadPixels(new Rect(0,0,Screen.width, Screen.height), 0, 0);
+        texture.Apply();
+
+        string name = "Screenshot_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".png";
+
+        //PC
+        byte[] bytes = texture.EncodeToPNG();
+        File.WriteAllBytes(Application.dataPath + "/ScreenshotFolder/" + name, bytes);
+
+        Destroy(texture);
+
+        debugText.text = "Saved a pic: " + texture;
     }
 }
