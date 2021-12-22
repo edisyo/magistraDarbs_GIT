@@ -31,7 +31,7 @@ public class PhotoLogic : MonoBehaviour
         if(m_ARCameraBackground != null)
             Debug.Log("Camera Background Found");
         
-        screenShotGameObject.SetActive(false);
+        //screenShotGameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -73,8 +73,10 @@ public class PhotoLogic : MonoBehaviour
         byte[] bytes = texture.EncodeToPNG();
         File.WriteAllBytes(Application.dataPath + "/ScreenshotFolder/" + name, bytes);
 
+        debugText.text = "Saved a pic: " + texture;
+        
         Destroy(texture);
 
-        debugText.text = "Saved a pic: " + texture;
+        
     }
 }
