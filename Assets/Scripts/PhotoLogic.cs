@@ -6,6 +6,7 @@ using UnityEngine.XR.ARSubsystems;
 using UnityEngine.UIElements;
 using TMPro;
 using System.IO;
+using UnityEngine.UI;
 
 public class PhotoLogic : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class PhotoLogic : MonoBehaviour
     Texture2D m_CameraTexture;
 
 
-    private Image screenshotImage;
+    private UnityEngine.UI.Image screenshotImage;
     public GameObject screenShotGameObject;
     public TextMeshProUGUI debugText;
     
@@ -73,8 +74,10 @@ public class PhotoLogic : MonoBehaviour
         byte[] bytes = texture.EncodeToPNG();
         File.WriteAllBytes(Application.dataPath + "/ScreenshotFolder/" + name, bytes);
 
-        debugText.text = "Saved a pic: " + texture;
-        
+        debugText.text = "Saved a pic: ";
+
+        screenShotGameObject.GetComponent<RawImage>().texture = texture;
+
         Destroy(texture);
 
         

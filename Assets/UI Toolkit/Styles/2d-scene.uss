@@ -1,10 +1,10 @@
 .take-photo-button {
     font-size: 70px;
     -unity-text-outline-width: 0;
-    text-shadow: 3px 1px 0 rgba(156, 156, 156, 255);
-    -unity-text-outline-color: rgba(0, 0, 0, 255);
-    color: rgba(114, 255, 247, 255);
-    -unity-background-image-tint-color: rgba(255, 255, 255, 255);
+    text-shadow: 3px 1px 0 rgb(156, 156, 156);
+    -unity-text-outline-color: rgb(0, 0, 0);
+    color: rgb(114, 255, 247);
+    -unity-background-image-tint-color: rgb(255, 255, 255);
     background-color: rgba(113, 113, 113, 0.15);
     -unity-slice-left: 0;
     -unity-slice-top: 0;
@@ -18,10 +18,10 @@
     border-bottom-left-radius: 40px;
     border-top-right-radius: 40px;
     border-bottom-right-radius: 40px;
-    border-left-color: rgba(58, 58, 58, 255);
-    border-right-color: rgba(58, 58, 58, 255);
-    border-top-color: rgba(58, 58, 58, 255);
-    border-bottom-color: rgba(58, 58, 58, 255);
+    border-left-color: rgb(58, 58, 58);
+    border-right-color: rgb(58, 58, 58);
+    border-top-color: rgb(58, 58, 58);
+    border-bottom-color: rgb(58, 58, 58);
     bottom: 10%;
 }
 
@@ -32,7 +32,7 @@
     -unity-text-outline-color: rgb(0, 0, 0);
     color: rgb(49, 255, 243);
     -unity-background-image-tint-color: rgb(255, 255, 255);
-    background-color: rgba(118, 118, 118, 0.19);
+    background-color: rgba(77, 77, 77, 0.53);
     -unity-slice-left: 0;
     -unity-slice-top: 0;
     -unity-slice-right: 0;
