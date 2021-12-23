@@ -41,6 +41,7 @@ public class PhotoLogic : MonoBehaviour
         
     }
 
+    static WebCamTexture backCam;
     public void takePhoto()
     {
         // var tex2D = ScreenCapture.CaptureScreenshotAsTexture();
@@ -57,7 +58,15 @@ public class PhotoLogic : MonoBehaviour
         // Dispose the XRCpuImage to avoid resource leaks.
         //image.Dispose();
 
-        StartCoroutine("Screenshot");
+        //StartCoroutine("Screenshot");
+
+        if(backCam == null)
+            backCam = new WebCamTexture();
+
+        screenshotUI_img.GetComponent<Renderer>().material.mainTexture = backCam;
+
+        if(!backCam.isPlaying)
+            backCam.Play();
     }
 
     private IEnumerator Screenshot()

@@ -463,7 +463,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8da6608ef4b22044b07257fc7ccff48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenShotGameObject: {fileID: 0}
+  screenshotUI_img: {fileID: 0}
   debugText: {fileID: 1724698917}
 --- !u!1 &1032446107
 GameObject:
@@ -1112,7 +1112,7 @@ PrefabInstance:
     - target: {fileID: 2671085987482128589, guid: 46550bbcc004a3f448e2df450ce49ccd,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2671085987482128589, guid: 46550bbcc004a3f448e2df450ce49ccd,
         type: 3}
