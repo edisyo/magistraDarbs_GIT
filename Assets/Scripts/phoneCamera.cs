@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class phoneCamera : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class phoneCamera : MonoBehaviour
 
     public RawImage background;
     public AspectRatioFitter fit;
+    public TextMeshProUGUI debugText;
     
     // Start is called before the first frame update
     void Start()
@@ -59,5 +61,13 @@ public class phoneCamera : MonoBehaviour
 
         int orient = -backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
+
+        //debugText.text = "backCam: " + backCam;
+        
+    }
+
+    public WebCamTexture getBackCam()
+    {
+        return backCam;
     }
 }

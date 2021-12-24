@@ -10,29 +10,14 @@ using UnityEngine.UI;
 
 public class PhotoLogic : MonoBehaviour
 {
-    ARCameraManager cameraManager;
-    ARCameraBackground m_ARCameraBackground;
-    Texture2D m_CameraTexture;
-
-
-    private UnityEngine.UI.Image screenshotImage;
-    public RawImage screenshotUI_img;
-    public TextMeshProUGUI debugText;
+    //public RawImage tookedPicture;
+    //public TextMeshProUGUI debugText;
     
 
 
     void Start()
     {
-        cameraManager = FindObjectOfType<ARCameraManager>();
-        m_ARCameraBackground = FindObjectOfType<ARCameraBackground>();
-
-        if(cameraManager != null)
-            Debug.Log("Camera Manager Found");
         
-        if(m_ARCameraBackground != null)
-            Debug.Log("Camera Background Found");
-        
-        //screenShotGameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -41,54 +26,8 @@ public class PhotoLogic : MonoBehaviour
         
     }
 
-    static WebCamTexture backCam;
     public void takePhoto()
     {
-        // var tex2D = ScreenCapture.CaptureScreenshotAsTexture();
-        // Rect screenSize = new Rect(0,0, Screen.width, Screen.height);
-        // Sprite newSprite = Sprite.Create(tex2D, screenSize, Vector2.zero);
 
-        // screenShotGameObject.GetComponent<Image>().sprite = newSprite;
-        // screenShotGameObject.SetActive(true);
-        // debugText.text += "tex2d: " + tex2D + "\n newSprite: " + newSprite;
-
-        // //cleanup
-        // Object.Destroy(tex2D);
-        
-        // Dispose the XRCpuImage to avoid resource leaks.
-        //image.Dispose();
-
-        //StartCoroutine("Screenshot");
-
-        if(backCam == null)
-            backCam = new WebCamTexture();
-
-        screenshotUI_img.GetComponent<Renderer>().material.mainTexture = backCam;
-
-        if(!backCam.isPlaying)
-            backCam.Play();
-    }
-
-    private IEnumerator Screenshot()
-    {
-        yield return new WaitForEndOfFrame();
-        Texture2D texture = new Texture2D(Screen.width, Screen.height, TextureFormat.RGB24, false);
-
-        texture.ReadPixels(new Rect(0,0,Screen.width, Screen.height), 0, 0);
-        texture.Apply();
-
-        //string name = "Screenshot_" + System.DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss") + ".png";
-
-        //PC
-        //byte[] bytes = texture.EncodeToPNG();
-        //File.WriteAllBytes(Application.dataPath + "/ScreenshotFolder/" + name, bytes);
-
-        debugText.text = "Saved a pic: ";
-
-        screenshotUI_img.texture = texture;
-
-        Destroy(texture);
-
-        
     }
 }
