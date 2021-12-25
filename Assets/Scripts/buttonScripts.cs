@@ -8,18 +8,28 @@ using UnityEngine.XR.ARSubsystems;
 
 public class buttonScripts : MonoBehaviour
 {
+    //ELEMENTS FROM UI BUILDER
     UnityEngine.UIElements.Button btn_2d;
     UnityEngine.UIElements.Button btn_3d;
     UnityEngine.UIElements.Button btn_exit;
     UnityEngine.UIElements.Button btn_takePhoto;
+    UnityEngine.UIElements.Button btn_reTakePhoto;
+
+    //OLD UNITY UI SYSTEM
+    public UnityEngine.UI.Button btn_back;
+
     public phoneCamera m_phoneCamera;
     private VisualElement root;
 
+    private WebCamTexture backCameraStream;
     public RawImage tookedPhoto;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (tookedPhoto != null)
+            tookedPhoto.gameObject.SetActive(false);
+
         //GET UIDocument component
         if(transform.GetComponent<UIDocument>() != null)
         {
@@ -38,7 +48,7 @@ public class buttonScripts : MonoBehaviour
             btn_3d = root.Q<UnityEngine.UIElements.Button>("3dButton");
             btn_exit = root.Q<UnityEngine.UIElements.Button>("exitButton");
             btn_takePhoto = root.Q<UnityEngine.UIElements.Button>("takePhoto_button");
-            btn_takePhoto = root.Q<UnityEngine.UIElements.Button>("takePhoto_button");
+            btn_reTakePhoto = root.Q<UnityEngine.UIElements.Button>("reTakePhoto_button");
         }
         
 
@@ -51,10 +61,13 @@ public class buttonScripts : MonoBehaviour
             btn_exit.clicked += ButtonExitPressed;
         if(btn_takePhoto != null)
             btn_takePhoto.clicked += takePhoto;
+        if (btn_reTakePhoto != null)
+            btn_reTakePhoto.clicked += reTakePhotoPressed;
 
         if(btn_2d == null ||btn_3d == null || btn_exit == null ||btn_takePhoto == null)
             Debug.LogWarning("Missing some UI Buttons..");
-            
+
+        btn_reTakePhoto.style.display = DisplayStyle.None;
 
     }
 
@@ -85,28 +98,61 @@ public class buttonScripts : MonoBehaviour
 
     public void takePhoto()
     {
-        //PhotoLogic photoLogic = FindObjectOfType<PhotoLogic>();
-        //photoLogic.takePhoto();
-        //XRCpuImage image = photoLogic.XRtakePhoto();
-        WebCamTexture backCameraStream;
-
+        //Get webcamtexture
         backCameraStream = m_phoneCamera.getBackCam();
+
+        //Take color data from one frame = take screenshot from video
         Color32[] data = new Color32[backCameraStream.width * backCameraStream.height];
-        Texture2D texture2D = new Texture2D(backCameraStream.width, backCameraStream.height);
-        //tookedPhoto.texture = tookedPhoto_webCamTexture;
+        Texture2D screenshot = new Texture2D(backCameraStream.width, backCameraStream.height);
+        screenshot.SetPixels32(backCameraStream.GetPixels32(data));
+        screenshot.Apply();
 
-        //tookedPhoto.texture = backCameraStream.GetPixels32(data);
+        //Fix screenshots ratio, mirroring and rotation
+        float ratio = (float)backCameraStream.width / (float)backCameraStream.height;
+        tookedPhoto.GetComponent<AspectRatioFitter>().aspectRatio = ratio;
 
-        texture2D.SetPixels32(backCameraStream.GetPixels32(data));
-        texture2D.Apply();
+        float scaleY = backCameraStream.videoVerticallyMirrored ? -1f : 1f;
+        tookedPhoto.rectTransform.localScale = new Vector3(1f, scaleY, 1f);
 
-        tookedPhoto.texture = texture2D;
+        int orient = -backCameraStream.videoRotationAngle;
+        tookedPhoto.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
+
+        //Assign tooked screenshot to UI Raw Image
+        tookedPhoto.texture = screenshot;
+
+        //Pause camera stream, cant see it anyway
+        backCameraStream.Pause();
+        btn_takePhoto.style.display = DisplayStyle.None;
+        btn_reTakePhoto.style.display = DisplayStyle.Flex;
+
+        tookedPhoto.gameObject.SetActive(true);
+        turnOffUI();
 
     }
 
     public void ButtonExitPressed()
     {
         Application.Quit();
+    }
+
+    public void reTakePhotoPressed()
+    {
+        backCameraStream.Play();
+        btn_reTakePhoto.style.display = DisplayStyle.None;
+        tookedPhoto.gameObject.SetActive(false);
+        turnONUI();
+    }
+
+    public void turnOffUI()
+    {
+        btn_takePhoto.style.display = DisplayStyle.None;
+        btn_back.gameObject.SetActive(false);
+    }
+
+    public void turnONUI()
+    {
+        btn_takePhoto.style.display = DisplayStyle.Flex;
+        btn_back.gameObject.SetActive(true);
     }
 
 }
