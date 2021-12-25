@@ -14,12 +14,15 @@ public class buttonScripts : MonoBehaviour
     UnityEngine.UIElements.Button btn_exit;
     UnityEngine.UIElements.Button btn_takePhoto;
     UnityEngine.UIElements.Button btn_reTakePhoto;
+    UnityEngine.UIElements.Button btn_usePhoto;
+    UnityEngine.UIElements.Button btn_instructionOK;
+    UnityEngine.UIElements.VisualElement panel_instruction;
+    UnityEngine.UIElements.VisualElement root;
 
     //OLD UNITY UI SYSTEM
     public UnityEngine.UI.Button btn_back;
 
     public phoneCamera m_phoneCamera;
-    private VisualElement root;
 
     private WebCamTexture backCameraStream;
     public RawImage tookedPhoto;
@@ -49,8 +52,11 @@ public class buttonScripts : MonoBehaviour
             btn_exit = root.Q<UnityEngine.UIElements.Button>("exitButton");
             btn_takePhoto = root.Q<UnityEngine.UIElements.Button>("takePhoto_button");
             btn_reTakePhoto = root.Q<UnityEngine.UIElements.Button>("reTakePhoto_button");
+            btn_usePhoto = root.Q<UnityEngine.UIElements.Button>("usePhoto_button");
+            btn_instructionOK = root.Q<UnityEngine.UIElements.Button>("instructionOK_button");
+            panel_instruction = root.Q<UnityEngine.UIElements.VisualElement>("instructions_panel");
+
         }
-        
 
         //assign functions when buttons are clicked
         if(btn_2d != null)
@@ -63,12 +69,23 @@ public class buttonScripts : MonoBehaviour
             btn_takePhoto.clicked += takePhoto;
         if (btn_reTakePhoto != null)
             btn_reTakePhoto.clicked += reTakePhotoPressed;
+        if (btn_usePhoto != null)
+            btn_usePhoto.clicked += usePhotoPressed;
+        if (btn_instructionOK != null)
+            btn_instructionOK.clicked += instructionsOKPressed;
 
-        if(btn_2d == null ||btn_3d == null || btn_exit == null ||btn_takePhoto == null)
-            Debug.LogWarning("Missing some UI Buttons..");
-
+        //Turn off elements which are not needed at first
         if(btn_reTakePhoto != null)
             btn_reTakePhoto.style.display = DisplayStyle.None;
+        if (btn_usePhoto != null)
+            btn_usePhoto.style.display = DisplayStyle.None;
+        if (btn_takePhoto != null)
+            btn_takePhoto.style.display = DisplayStyle.None;
+        if (panel_instruction != null)
+            panel_instruction.style.display = DisplayStyle.Flex;
+
+        if(btn_back != null)
+            btn_back.gameObject.SetActive(false);
 
     }
 
@@ -104,7 +121,7 @@ public class buttonScripts : MonoBehaviour
 
         //Get the same camera stream setup as in phoneCamera script
         tookedPhoto.GetComponent<AspectRatioFitter>().aspectRatio = m_phoneCamera.getRatio();
-        //tookedPhoto.rectTransform.localScale = new Vector3(1f, m_phoneCamera.getScaleY(), 1f);
+        tookedPhoto.rectTransform.localScale = new Vector3(1f, m_phoneCamera.getScaleY(), 1f);
         tookedPhoto.rectTransform.localEulerAngles = new Vector3(0, 0, m_phoneCamera.getOrient());
 
         //Take color data from one frame = take screenshot from video (WORKING METHOD!!!)
@@ -120,6 +137,7 @@ public class buttonScripts : MonoBehaviour
         backCameraStream.Pause();
         btn_takePhoto.style.display = DisplayStyle.None;
         btn_reTakePhoto.style.display = DisplayStyle.Flex;
+        btn_usePhoto.style.display = DisplayStyle.Flex;
 
         tookedPhoto.gameObject.SetActive(true);
         turnOffUI();
@@ -135,8 +153,16 @@ public class buttonScripts : MonoBehaviour
     {
         backCameraStream.Play();
         btn_reTakePhoto.style.display = DisplayStyle.None;
+        btn_usePhoto.style.display = DisplayStyle.None;
         tookedPhoto.gameObject.SetActive(false);
         turnONUI();
+    }
+
+    public void usePhotoPressed()
+    {
+        btn_reTakePhoto.style.display = DisplayStyle.None;
+        btn_usePhoto.style.display = DisplayStyle.None;
+        btn_back.gameObject.SetActive(true);
     }
 
     public void turnOffUI()
@@ -149,6 +175,13 @@ public class buttonScripts : MonoBehaviour
     {
         btn_takePhoto.style.display = DisplayStyle.Flex;
         btn_back.gameObject.SetActive(true);
+    }
+
+    public void instructionsOKPressed()
+    {
+        panel_instruction.style.display = DisplayStyle.None;
+        btn_back.gameObject.SetActive(true);
+        btn_takePhoto.style.display = DisplayStyle.Flex;
     }
 
 }

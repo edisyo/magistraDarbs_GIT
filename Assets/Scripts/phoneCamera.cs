@@ -16,8 +16,6 @@ public class phoneCamera : MonoBehaviour
     public RawImage background;
     public AspectRatioFitter fit;
     public TextMeshProUGUI debugText;
-    public bool CameraIsFrontFacing;
-
     
     // Start is called before the first frame update
     void Start()

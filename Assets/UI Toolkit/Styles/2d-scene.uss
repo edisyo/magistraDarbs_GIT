@@ -5,7 +5,7 @@
     -unity-text-outline-color: rgb(0, 0, 0);
     color: rgb(114, 255, 247);
     -unity-background-image-tint-color: rgb(255, 255, 255);
-    background-color: rgba(113, 113, 113, 0.15);
+    background-color: rgba(161, 161, 161, 0.09);
     -unity-slice-left: 0;
     -unity-slice-top: 0;
     -unity-slice-right: 0;
@@ -32,7 +32,7 @@
     -unity-text-outline-color: rgb(0, 0, 0);
     color: rgb(49, 255, 243);
     -unity-background-image-tint-color: rgb(255, 255, 255);
-    background-color: rgba(77, 77, 77, 0.53);
+    background-color: rgba(53, 53, 53, 0.53);
     -unity-slice-left: 0;
     -unity-slice-top: 0;
     -unity-slice-right: 0;
@@ -59,7 +59,7 @@
     -unity-text-outline-color: rgb(0, 0, 0);
     color: rgb(40, 255, 245);
     -unity-background-image-tint-color: rgb(255, 255, 255);
-    background-color: rgba(77, 77, 77, 0.53);
+    background-color: rgba(53, 53, 53, 0.53);
     -unity-slice-left: 0;
     -unity-slice-top: 0;
     -unity-slice-right: 0;
