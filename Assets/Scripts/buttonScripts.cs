@@ -67,7 +67,8 @@ public class buttonScripts : MonoBehaviour
         if(btn_2d == null ||btn_3d == null || btn_exit == null ||btn_takePhoto == null)
             Debug.LogWarning("Missing some UI Buttons..");
 
-        btn_reTakePhoto.style.display = DisplayStyle.None;
+        if(btn_reTakePhoto != null)
+            btn_reTakePhoto.style.display = DisplayStyle.None;
 
     }
 
@@ -98,24 +99,19 @@ public class buttonScripts : MonoBehaviour
 
     public void takePhoto()
     {
-        //Get webcamtexture
+        //Get webcamtexture method 1
         backCameraStream = m_phoneCamera.getBackCam();
 
-        //Take color data from one frame = take screenshot from video
+        //Get the same camera stream setup as in phoneCamera script
+        tookedPhoto.GetComponent<AspectRatioFitter>().aspectRatio = m_phoneCamera.getRatio();
+        //tookedPhoto.rectTransform.localScale = new Vector3(1f, m_phoneCamera.getScaleY(), 1f);
+        tookedPhoto.rectTransform.localEulerAngles = new Vector3(0, 0, m_phoneCamera.getOrient());
+
+        //Take color data from one frame = take screenshot from video (WORKING METHOD!!!)
         Color32[] data = new Color32[backCameraStream.width * backCameraStream.height];
         Texture2D screenshot = new Texture2D(backCameraStream.width, backCameraStream.height);
         screenshot.SetPixels32(backCameraStream.GetPixels32(data));
         screenshot.Apply();
-
-        //Fix screenshots ratio, mirroring and rotation
-        float ratio = (float)backCameraStream.width / (float)backCameraStream.height;
-        tookedPhoto.GetComponent<AspectRatioFitter>().aspectRatio = ratio;
-
-        float scaleY = backCameraStream.videoVerticallyMirrored ? -1f : 1f;
-        tookedPhoto.rectTransform.localScale = new Vector3(1f, scaleY, 1f);
-
-        int orient = -backCameraStream.videoRotationAngle;
-        tookedPhoto.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
 
         //Assign tooked screenshot to UI Raw Image
         tookedPhoto.texture = screenshot;

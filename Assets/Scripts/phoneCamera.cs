@@ -9,6 +9,9 @@ public class phoneCamera : MonoBehaviour
     private bool camAvailable;
     private WebCamTexture backCam;
     private Texture defaultBackground;
+    private float ratio;
+    private float scaleY;
+    private int orient;
 
     public RawImage background;
     public AspectRatioFitter fit;
@@ -31,8 +34,8 @@ public class phoneCamera : MonoBehaviour
 
         for(int i = 0; i < devices.Length; i++)
         {
-            //if(!devices[i].isFrontFacing)
-            if (CameraIsFrontFacing)
+
+            if (!devices[i].isFrontFacing)
             {
                 backCam = new WebCamTexture(devices[i].name, Screen.width, Screen.height);
             }
@@ -56,14 +59,15 @@ public class phoneCamera : MonoBehaviour
         if(!camAvailable)
             return;
         
-        float ratio = (float)backCam.width / (float)backCam.height;
+        ratio = (float)backCam.width / (float)backCam.height;
         fit.aspectRatio = ratio;
 
-        float scaleY = backCam.videoVerticallyMirrored ? -1f : 1f;
+        scaleY = backCam.videoVerticallyMirrored ? -1f : 1f;
         background.rectTransform.localScale = new Vector3(1f, scaleY, 1f);
 
-        int orient = -backCam.videoRotationAngle;
+        orient = -backCam.videoRotationAngle;
         background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
+        //debugText.text = "Orient: " + orient;
 
         //debugText.text = "backCam: " + backCam;
         
@@ -72,5 +76,20 @@ public class phoneCamera : MonoBehaviour
     public WebCamTexture getBackCam()
     {
         return backCam;
+    }
+
+    public float getRatio()
+    {
+        return ratio;
+    }
+
+    public float getScaleY()
+    {
+        return scaleY;
+    }
+
+    public int getOrient()
+    {
+        return orient;
     }
 }
