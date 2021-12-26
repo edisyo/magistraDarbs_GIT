@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class MoveElementUI : MonoBehaviour
-{
-    public Color activeColor;
-    
+{    
     private float dist;
     private bool isDragging = false;
     private Vector3 offset;
@@ -21,8 +19,9 @@ public class MoveElementUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        #if UNITY_EDITOR
-        if(Input.GetMouseButtonDown(0))
+
+#if UNITY_EDITOR
+        if(!isDragging && Input.GetMouseButtonDown(0))
         {
             Vector3 mousePos = Input.mousePosition;
 
@@ -35,39 +34,45 @@ public class MoveElementUI : MonoBehaviour
                 //If Touched object has ElementUI script
                 if(hit.collider.GetComponent<ElementUI>() != null)
                 {
-                    Debug.Log("Hello there");
                     hit.collider.GetComponent<ElementUI>().isTouched = true;
 
                     objToDrag = hit.transform;
-                    dist = hit.transform.position.z - Camera.main.transform.position.z;
-                    Vector3 v3 = new Vector3(mousePos.x, mousePos.y, dist);
+                    dist = hit.transform.position.z - Camera.main.transform.position.z;//cancel Z axis moving
+                    Vector3 v3 = new Vector3(mousePos.x, mousePos.y, hit.transform.position.z);
                     v3 = Camera.main.ScreenToWorldPoint(v3);
-                    offset = objToDrag.position - v3;
+                    offset = objToDrag.position - v3;//Object doesnt snap to mouses position
                     isDragging = true;
                 }
             }
         }
 
         //Dragging the object
-        if(isDragging && Input.GetMouseButtonDown(0))
+        if(isDragging)
         {
+            Cursor.visible = false;
             Vector3 v3 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, dist);
             v3 = Camera.main.ScreenToWorldPoint(v3);
             objToDrag.position = v3 + offset;
         }
 
         //If touch is ended or canceled
-        if(isDragging && Input.GetMouseButtonUp(0))
+        if(Input.GetMouseButtonUp(0))
         {
-            isDragging = false;
+            if(isDragging)
+            {
+                isDragging = false;
+                objToDrag.GetComponent<ElementUI>().isTouched = false;
+                Cursor.visible = true;
+            }
         }
-        #endif
 
-        #if PLATFORM_IPHONE
+#endif
 
+#if UNITY_IOS && !UNITY_EDITOR
         if(Input.touchCount != 1)
         {
             isDragging = false;
+            Debug.Log("touch");
             return;
         }
 
@@ -110,7 +115,8 @@ public class MoveElementUI : MonoBehaviour
         if(isDragging && (Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled))
         {
             isDragging = false;
+            objToDrag.GetComponent<ElementUI>().isTouched = false;
         }
-        #endif
+#endif
     }
 }

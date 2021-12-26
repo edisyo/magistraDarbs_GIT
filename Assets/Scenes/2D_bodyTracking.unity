@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   btn_back: {fileID: 1394987829}
   m_phoneCamera: {fileID: 1733173689}
-  shoulderLine: {fileID: 974863748}
+  shoulders: {fileID: 974863748}
   tookedPhoto: {fileID: 743582590}
 --- !u!4 &131875493
 Transform:
@@ -681,7 +681,7 @@ RectTransform:
   m_GameObject: {fileID: 743582588}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 530128072}
   m_RootOrder: 2
@@ -1088,7 +1088,7 @@ GameObject:
   - component: {fileID: 1223755531}
   - component: {fileID: 1223755532}
   m_Layer: 0
-  m_Name: touchManager
+  m_Name: moveElementManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1120,7 +1120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2722e28f63ae5149a9125a97f7ed6a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  activeColor: {r: 0, g: 1, b: 0.8998494, a: 1}
 --- !u!1 &1280663991
 GameObject:
   m_ObjectHideFlags: 0
@@ -1756,6 +1755,9 @@ MonoBehaviour:
   background: {fileID: 1204806625}
   fit: {fileID: 1204806627}
   debugText: {fileID: 1724698917}
+  float1: 0
+  float2: 0
+  float3: 0
 --- !u!1 &1925847744
 GameObject:
   m_ObjectHideFlags: 0
@@ -1783,7 +1785,7 @@ RectTransform:
   m_GameObject: {fileID: 1925847744}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 530128072}
   m_RootOrder: 0

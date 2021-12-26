@@ -24,7 +24,7 @@ public class buttonScripts : MonoBehaviour
 
 
     public phoneCamera m_phoneCamera;
-    public GameObject shoulderLine;
+    public GameObject shoulders;
     private WebCamTexture backCameraStream;
     public RawImage tookedPhoto;
 
@@ -34,8 +34,8 @@ public class buttonScripts : MonoBehaviour
         if (tookedPhoto != null)
             tookedPhoto.gameObject.SetActive(false);
         
-        if(shoulderLine != null)
-            shoulderLine.SetActive(false);
+        if(shoulders != null)
+            shoulders.SetActive(false);
 
         //GET UIDocument component
         if(transform.GetComponent<UIDocument>() != null)
@@ -186,7 +186,14 @@ public class buttonScripts : MonoBehaviour
         panel_instruction.style.display = DisplayStyle.None;
         btn_back.gameObject.SetActive(true);
         btn_takePhoto.style.display = DisplayStyle.Flex;
-        shoulderLine.SetActive(true);
+        
+        var tempElement = shoulders.GetComponentsInChildren<ElementUI>();
+        foreach(var tempgo in tempElement)
+        {
+            Debug.Log("tempGO: " + tempgo);
+        }
+        shoulders.SetActive(true);
+
     }
 
 }

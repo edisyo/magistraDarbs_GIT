@@ -16,6 +16,11 @@ public class phoneCamera : MonoBehaviour
     public RawImage background;
     public AspectRatioFitter fit;
     public TextMeshProUGUI debugText;
+
+    public float float1;
+    public float float2;
+
+    public float float3;
     
     // Start is called before the first frame update
     void Start()
@@ -41,7 +46,6 @@ public class phoneCamera : MonoBehaviour
 
             #if PLATFORM_IOS
             if (!devices[i].isFrontFacing)
-            
             {
                 backCam = new WebCamTexture(devices[i].name, Screen.width, Screen.height);
             }
@@ -73,7 +77,7 @@ public class phoneCamera : MonoBehaviour
         background.rectTransform.localScale = new Vector3(1f, scaleY, 1f);
 
         orient = -backCam.videoRotationAngle;
-        background.rectTransform.localEulerAngles = new Vector3(0, 0, orient);
+        background.rectTransform.localEulerAngles = new Vector3(0f, 180f, orient);
         //debugText.text = "Orient: " + orient;
 
         //debugText.text = "backCam: " + backCam;
