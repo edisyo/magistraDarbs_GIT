@@ -125,8 +125,8 @@ public class buttonScripts : MonoBehaviour
 
         //Get the same camera stream setup as in phoneCamera script
         tookedPhoto.GetComponent<AspectRatioFitter>().aspectRatio = m_phoneCamera.getRatio();
-        //tookedPhoto.rectTransform.localScale = new Vector3(1f, m_phoneCamera.getScaleY(), 1f); //Mirrors the screenshot - not needed
-        tookedPhoto.rectTransform.localEulerAngles = new Vector3(0, 0, m_phoneCamera.getOrient());
+        tookedPhoto.rectTransform.localScale = new Vector3(1f, m_phoneCamera.getScaleY(), 1f);
+        tookedPhoto.rectTransform.localEulerAngles = new Vector3(0f, 180f, m_phoneCamera.getOrient());//0,0,orient for macbook
 
         //Take color data from one frame = take screenshot from video (WORKING METHOD!!!)
         Color32[] data = new Color32[backCameraStream.width * backCameraStream.height];
