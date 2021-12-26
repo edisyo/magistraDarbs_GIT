@@ -22,8 +22,9 @@ public class buttonScripts : MonoBehaviour
     //OLD UNITY UI SYSTEM
     public UnityEngine.UI.Button btn_back;
 
-    public phoneCamera m_phoneCamera;
 
+    public phoneCamera m_phoneCamera;
+    public GameObject shoulderLine;
     private WebCamTexture backCameraStream;
     public RawImage tookedPhoto;
 
@@ -32,6 +33,9 @@ public class buttonScripts : MonoBehaviour
     {
         if (tookedPhoto != null)
             tookedPhoto.gameObject.SetActive(false);
+        
+        if(shoulderLine != null)
+            shoulderLine.SetActive(false);
 
         //GET UIDocument component
         if(transform.GetComponent<UIDocument>() != null)
@@ -121,7 +125,7 @@ public class buttonScripts : MonoBehaviour
 
         //Get the same camera stream setup as in phoneCamera script
         tookedPhoto.GetComponent<AspectRatioFitter>().aspectRatio = m_phoneCamera.getRatio();
-        tookedPhoto.rectTransform.localScale = new Vector3(1f, m_phoneCamera.getScaleY(), 1f);
+        //tookedPhoto.rectTransform.localScale = new Vector3(1f, m_phoneCamera.getScaleY(), 1f); //Mirrors the screenshot - not needed
         tookedPhoto.rectTransform.localEulerAngles = new Vector3(0, 0, m_phoneCamera.getOrient());
 
         //Take color data from one frame = take screenshot from video (WORKING METHOD!!!)
@@ -182,6 +186,7 @@ public class buttonScripts : MonoBehaviour
         panel_instruction.style.display = DisplayStyle.None;
         btn_back.gameObject.SetActive(true);
         btn_takePhoto.style.display = DisplayStyle.Flex;
+        shoulderLine.SetActive(true);
     }
 
 }

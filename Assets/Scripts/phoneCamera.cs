@@ -33,7 +33,7 @@ public class phoneCamera : MonoBehaviour
         for(int i = 0; i < devices.Length; i++)
         {
 
-            if (!devices[i].isFrontFacing)
+            if (devices[i].isFrontFacing)
             {
                 backCam = new WebCamTexture(devices[i].name, Screen.width, Screen.height);
             }
