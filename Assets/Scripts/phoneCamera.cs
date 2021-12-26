@@ -32,11 +32,20 @@ public class phoneCamera : MonoBehaviour
 
         for(int i = 0; i < devices.Length; i++)
         {
-
+            #if UNITY_EDITOR
             if (devices[i].isFrontFacing)
             {
                 backCam = new WebCamTexture(devices[i].name, Screen.width, Screen.height);
             }
+            #endif
+
+            #if PLATFORM_IOS
+            if (!devices[i].isFrontFacing)
+            
+            {
+                backCam = new WebCamTexture(devices[i].name, Screen.width, Screen.height);
+            }
+            #endif
         }
 
         if(backCam == null)

@@ -8,7 +8,6 @@ public class ElementUI : MonoBehaviour
     public Color defaultColor;
     public Color activeColor;
     [HideInInspector] public bool isTouched;
-    [HideInInspector] public bool isDragging;
 
     Image image;
     
@@ -24,11 +23,9 @@ public class ElementUI : MonoBehaviour
     {
         if(isTouched)
         {
-            Debug.Log("active");
             image.color = activeColor;
         }else
         {
-            Debug.Log("default");
             image.color = defaultColor;
         }
     }
