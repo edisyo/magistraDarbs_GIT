@@ -59,7 +59,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 
     private void Start()
     {
-        debugText.text = $"Looking for a body... \n";
+        debugText.text = $"Meklē cilvēka ķermeni... \n";
         line.gameObject.SetActive(false);
     }
 
