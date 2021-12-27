@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -27,15 +28,27 @@ public class buttonScripts : MonoBehaviour
     public GameObject shoulders;
     private WebCamTexture backCameraStream;
     public RawImage tookedPhoto;
+    private MoveElementUI moveElementUI;
+    private GameObject degreetext;
 
     // Start is called before the first frame update
     void Start()
     {
+        moveElementUI = FindObjectOfType<MoveElementUI>();
+
+        if(moveElementUI != null)
+            moveElementUI.gameObject.SetActive(false);
         if (tookedPhoto != null)
             tookedPhoto.gameObject.SetActive(false);
-        
         if(shoulders != null)
+        {
             shoulders.SetActive(false);
+            degreetext = shoulders.GetComponentInChildren<TextMeshProUGUI>().gameObject;
+            degreetext.SetActive(false);
+        }
+            
+
+        //tookedPhoto.color = Color.white;//So that in Editor it can be darker - to see other objects
 
         //GET UIDocument component
         if(transform.GetComponent<UIDocument>() != null)
@@ -136,6 +149,7 @@ public class buttonScripts : MonoBehaviour
 
         //Assign tooked screenshot to UI Raw Image
         tookedPhoto.texture = screenshot;
+        
 
         //Pause camera stream, cant see it anyway
         backCameraStream.Pause();
@@ -167,6 +181,15 @@ public class buttonScripts : MonoBehaviour
         btn_reTakePhoto.style.display = DisplayStyle.None;
         btn_usePhoto.style.display = DisplayStyle.None;
         btn_back.gameObject.SetActive(true);
+        moveElementUI.gameObject.SetActive(true);
+        degreetext.SetActive(true);
+
+        var tempElement = shoulders.GetComponentsInChildren<ElementUI>();
+        foreach(var tempgo in tempElement)
+        {
+            tempgo.isActive = true;
+        }
+        
     }
 
     public void turnOffUI()
@@ -184,15 +207,12 @@ public class buttonScripts : MonoBehaviour
     public void instructionsOKPressed()
     {
         panel_instruction.style.display = DisplayStyle.None;
-        btn_back.gameObject.SetActive(true);
         btn_takePhoto.style.display = DisplayStyle.Flex;
-        
-        var tempElement = shoulders.GetComponentsInChildren<ElementUI>();
-        foreach(var tempgo in tempElement)
-        {
-            Debug.Log("tempGO: " + tempgo);
-        }
+
+        btn_back.gameObject.SetActive(true);
+
         shoulders.SetActive(true);
+        
 
     }
 

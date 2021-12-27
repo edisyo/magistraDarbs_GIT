@@ -38,7 +38,7 @@ public class MoveElementUI : MonoBehaviour
 
                     objToDrag = hit.transform;
                     dist = hit.transform.position.z - Camera.main.transform.position.z;//cancel Z axis moving
-                    Vector3 v3 = new Vector3(mousePos.x, mousePos.y, hit.transform.position.z);
+                    Vector3 v3 = new Vector3(mousePos.x, mousePos.y, dist - 0.03f);
                     v3 = Camera.main.ScreenToWorldPoint(v3);
                     offset = objToDrag.position - v3;//Object doesnt snap to mouses position
                     isDragging = true;
@@ -50,7 +50,7 @@ public class MoveElementUI : MonoBehaviour
         if(isDragging)
         {
             Cursor.visible = false;
-            Vector3 v3 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, dist);
+            Vector3 v3 = new Vector3(Input.mousePosition.x, Input.mousePosition.y, dist - 0.03f);
             v3 = Camera.main.ScreenToWorldPoint(v3);
             objToDrag.position = v3 + offset;
         }
@@ -119,4 +119,5 @@ public class MoveElementUI : MonoBehaviour
         }
 #endif
     }
+
 }

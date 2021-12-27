@@ -12,6 +12,7 @@ public class skeletLineRenderer : MonoBehaviour
 
     public float lineStartWidth;
     public float lineEndWidth;
+    public float lineOffset = 0.01f;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,19 @@ public class skeletLineRenderer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(LineRendererName == "SHOULDER LINE")
+        {
+            if(line != null)
+            {
+                for(int i= 0; i < LineRendererObjects.Count; i++)
+                {
+                    Debug.Log("heeeelow");
+                    Vector3 v3 = new Vector3(LineRendererObjects[i].position.x, LineRendererObjects[i].position.y, LineRendererObjects[i].position.z + lineOffset);
+                    line.SetPosition(i, v3);
+                }
+            }
+        }
+
         if(line != null)
         {
             for(int i= 0; i < LineRendererObjects.Count; i++)

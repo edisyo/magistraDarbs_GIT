@@ -27,6 +27,7 @@ public class phoneCamera : MonoBehaviour
     {
         defaultBackground = background.texture;
         WebCamDevice[] devices = WebCamTexture.devices;
+        //background.GetComponent<RawImage>().color = Color.white;
 
         if(devices.Length == 0)
         {
@@ -44,7 +45,7 @@ public class phoneCamera : MonoBehaviour
             }
             #endif
 
-            #if PLATFORM_IOS
+            #if PLATFORM_IOS && !UNITY_EDITOR
             if (!devices[i].isFrontFacing)
             {
                 backCam = new WebCamTexture(devices[i].name, Screen.width, Screen.height);
