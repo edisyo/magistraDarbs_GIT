@@ -10,8 +10,18 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 {
     public boneToTrack[] bonesToTrack;
     public TextMeshProUGUI debugText;
-    private GameObject leftArm;
-    private GameObject rightArm;
+
+    //BONES
+    private GameObject Head;
+    private GameObject leftShoulder;
+    private GameObject rightShoulder;
+    private GameObject rightHip;
+    private GameObject leftHip;
+    private GameObject rightKnee;
+    private GameObject leftKnee;
+    private GameObject rightAnkle;
+    private GameObject leftAnkle;
+    
 
     public LineRenderer line;
 
@@ -126,8 +136,8 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
                 m_SkeletonTracker.Remove(humanBody.trackableId);
             }
 
-            rightArm.GetComponent<Renderer>().material.color = Color.white;
-            leftArm.GetComponent<Renderer>().material.color = Color.white;
+            rightShoulder.GetComponent<Renderer>().material.color = Color.white;
+            leftShoulder.GetComponent<Renderer>().material.color = Color.white;
             line.gameObject.SetActive(false);
         }
     }
@@ -136,23 +146,39 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
     {
         foreach (boneToTrack bone in bones)
         {
-            if (bone.transform.parent.name == "LeftArm")
-                leftArm = bone.gameObject;
+            if (bone.transform.parent.name == "Head")
+                Head = bone.gameObject;
+
             if (bone.transform.parent.name == "RightArm")
-                rightArm = bone.gameObject;
+                rightShoulder = bone.gameObject;
+            if (bone.transform.parent.name == "RightUpLeg")
+                rightHip = bone.gameObject;
+            if (bone.transform.parent.name == "RightLeg")
+                rightKnee = bone.gameObject;
+            if (bone.transform.parent.name == "RightFoot")
+                rightAnkle = bone.gameObject;
+
+            if (bone.transform.parent.name == "LeftArm")
+                leftShoulder = bone.gameObject;
+            if (bone.transform.parent.name == "LeftUpLeg")
+                leftHip = bone.gameObject;
+            if (bone.transform.parent.name == "LeftLeg")
+                leftKnee = bone.gameObject;
+            if (bone.transform.parent.name == "LeftFoot")
+                leftAnkle = bone.gameObject;
         }
 
         //debugText.text = $" Bone 1: {leftArm} and Bone 2: {rightArm} \n";
-        rightArm.GetComponent<Renderer>().material.color = Color.green;
-        leftArm.GetComponent<Renderer>().material.color = Color.green;
+        rightShoulder.GetComponent<Renderer>().material.color = Color.green;
+        leftShoulder.GetComponent<Renderer>().material.color = Color.green;
 
-        var direction = rightArm.transform.position - leftArm.transform.position;
+        var direction = rightShoulder.transform.position - leftShoulder.transform.position;
         var up = transform.up;
         var angle = Vector3.Angle(up,direction);
 
         line.gameObject.SetActive(true);
-        line.SetPosition(0, leftArm.transform.position);
-        line.SetPosition(1, rightArm.transform.position);
+        line.SetPosition(0, leftShoulder.transform.position);
+        line.SetPosition(1, rightShoulder.transform.position);
 
         debugText.text = "ANGLE: " + (angle - 90).ToString("F1");
     }
