@@ -1,0 +1,23 @@
+.whichToTrack_toggleText {
+    flex-grow: 1;
+    color: rgb(35, 118, 128);
+    display: flex;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    width: 20%;
+    font-size: 31px;
+    -unity-text-align: lower-center;
+    -unity-font-style: bold;
+}
+
+.whichToTrack_toggle {
+    flex-shrink: 1;
+    flex-grow: 1;
+    align-items: stretch;
+    width: auto;
+    margin-right: 0;
+    padding-right: 0;
+    padding-left: 8%;
+}

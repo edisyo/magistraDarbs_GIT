@@ -23,7 +23,7 @@ public class buttonScripts : MonoBehaviour
     //OLD UNITY UI SYSTEM
     public UnityEngine.UI.Button btn_back;
 
-
+    //FOR 2D SCENE
     public phoneCamera m_phoneCamera;
     public GameObject shoulders;
     private WebCamTexture backCameraStream;
@@ -54,16 +54,15 @@ public class buttonScripts : MonoBehaviour
         if(transform.GetComponent<UIDocument>() != null)
         {
             root = GetComponent<UIDocument>().rootVisualElement;
-            Debug.Log("Found Root gameobject from GetComponent");
         }else
         {
             root = FindObjectOfType<UIDocument>().rootVisualElement;
-            Debug.Log("Found Root gameobject from FindObject");
         }
             
         //GET UI elements from UIDOcument
         if(root != null)
         {
+            //2D
             btn_2d = root.Q<UnityEngine.UIElements.Button>("2dButton");
             btn_3d = root.Q<UnityEngine.UIElements.Button>("3dButton");
             btn_exit = root.Q<UnityEngine.UIElements.Button>("exitButton");
@@ -72,7 +71,6 @@ public class buttonScripts : MonoBehaviour
             btn_usePhoto = root.Q<UnityEngine.UIElements.Button>("usePhoto_button");
             btn_instructionOK = root.Q<UnityEngine.UIElements.Button>("instructionOK_button");
             panel_instruction = root.Q<UnityEngine.UIElements.VisualElement>("instructions_panel");
-
         }
 
         //assign functions when buttons are clicked
@@ -115,7 +113,7 @@ public class buttonScripts : MonoBehaviour
     public void LoadScene(string sceneNameToGoTo)
     {
         SceneManager.LoadScene(sceneNameToGoTo, LoadSceneMode.Single);
-        Debug.Log("Pressed Exit");
+        Debug.Log("Changing to {" + sceneNameToGoTo + "} scene");
     }
 
     public void Button2DPressed()
@@ -212,8 +210,8 @@ public class buttonScripts : MonoBehaviour
         btn_back.gameObject.SetActive(true);
 
         shoulders.SetActive(true);
-        
-
     }
+
+    
 
 }
