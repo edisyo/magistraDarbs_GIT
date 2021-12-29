@@ -1801,6 +1801,7 @@ GameObject:
   - component: {fileID: 5243648701735442022}
   - component: {fileID: 5243648701735442044}
   - component: {fileID: 5243648701735441993}
+  - component: {fileID: 7175981929020675705}
   m_Layer: 0
   m_Name: sphere (1)
   m_TagString: Untagged
@@ -1884,6 +1885,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7175981929020675705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5243648701735442123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80b3c1dad83c49978776ab7b60e41c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5243648701735442125
 GameObject:
   m_ObjectHideFlags: 0
@@ -1896,6 +1909,7 @@ GameObject:
   - component: {fileID: 5243648701735442020}
   - component: {fileID: 5243648701735442039}
   - component: {fileID: 5243648701735441999}
+  - component: {fileID: 8190337023982229638}
   m_Layer: 0
   m_Name: sphere
   m_TagString: Untagged
@@ -1932,7 +1946,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5243648701735442125}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -1979,6 +1993,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8190337023982229638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5243648701735442125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80b3c1dad83c49978776ab7b60e41c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5243648701735442127
 GameObject:
   m_ObjectHideFlags: 0
@@ -2321,6 +2347,7 @@ GameObject:
   - component: {fileID: 5243648701735442019}
   - component: {fileID: 5243648701735442041}
   - component: {fileID: 5243648701735442006}
+  - component: {fileID: 8279563082290821384}
   m_Layer: 0
   m_Name: sphere (2)
   m_TagString: Untagged
@@ -2404,6 +2431,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8279563082290821384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5243648701735442131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80b3c1dad83c49978776ab7b60e41c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5243648701735442132
 GameObject:
   m_ObjectHideFlags: 0
@@ -2543,6 +2582,7 @@ GameObject:
   - component: {fileID: 5243648701735442016}
   - component: {fileID: 5243648701735442046}
   - component: {fileID: 5243648701735441995}
+  - component: {fileID: 3966472182949049020}
   m_Layer: 0
   m_Name: sphere
   m_TagString: Untagged
@@ -2626,6 +2666,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3966472182949049020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5243648701735442134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80b3c1dad83c49978776ab7b60e41c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5243648701735442135
 GameObject:
   m_ObjectHideFlags: 0
@@ -2796,6 +2848,7 @@ GameObject:
   - component: {fileID: 5243648701735442029}
   - component: {fileID: 5243648701735442043}
   - component: {fileID: 5243648701735442000}
+  - component: {fileID: 9082315851614141959}
   m_Layer: 0
   m_Name: sphere
   m_TagString: Untagged
@@ -2879,6 +2932,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &9082315851614141959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5243648701735442138}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80b3c1dad83c49978776ab7b60e41c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5243648701735442139
 GameObject:
   m_ObjectHideFlags: 0
@@ -3403,6 +3468,7 @@ GameObject:
   - component: {fileID: 5243648701735442030}
   - component: {fileID: 5243648701735442052}
   - component: {fileID: 5243648701735442001}
+  - component: {fileID: 640608053985109876}
   m_Layer: 0
   m_Name: sphere (2)
   m_TagString: Untagged
@@ -3486,6 +3552,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &640608053985109876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5243648701735442149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80b3c1dad83c49978776ab7b60e41c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5243648701735442150
 GameObject:
   m_ObjectHideFlags: 0
@@ -3498,6 +3576,7 @@ GameObject:
   - component: {fileID: 5243648701735442031}
   - component: {fileID: 5243648701735442053}
   - component: {fileID: 5243648701735442002}
+  - component: {fileID: 2036731343450927063}
   m_Layer: 0
   m_Name: sphere (1)
   m_TagString: Untagged
@@ -3581,6 +3660,18 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2036731343450927063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5243648701735442150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a80b3c1dad83c49978776ab7b60e41c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5243648701735442151
 GameObject:
   m_ObjectHideFlags: 0

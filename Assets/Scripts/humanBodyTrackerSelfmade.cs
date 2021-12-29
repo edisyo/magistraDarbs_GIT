@@ -125,6 +125,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
                     checkShoulderAngles(bonesToTrack);
                 }else
                 {
+                    line.gameObject.SetActive(false);
                     debugText.text = $"Meklē cilvēka ķermeni... \n";
                 }
                 

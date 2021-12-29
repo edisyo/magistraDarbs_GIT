@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bonesToTrack: []
   debugText: {fileID: 299532603}
-  Head: {fileID: 0}
+  head: {fileID: 0}
   leftShoulder: {fileID: 0}
   rightShoulder: {fileID: 0}
   rightHip: {fileID: 0}
@@ -2690,7 +2690,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1946058329
 GameObject:
   m_ObjectHideFlags: 0
