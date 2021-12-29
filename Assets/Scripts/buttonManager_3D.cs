@@ -7,6 +7,8 @@ using UnityEditor;
 
 public class buttonManager_3D : MonoBehaviour
 {
+    private humanBodyTrackerSelfmade humanBodyTrackerSelfmade;
+
     VisualElement root;
     Button btn_back3D;
     Button btn_openSettings;
@@ -24,6 +26,8 @@ public class buttonManager_3D : MonoBehaviour
 
     private void Awake() 
     {
+        humanBodyTrackerSelfmade = FindObjectOfType<humanBodyTrackerSelfmade>();
+
         //GET UIDocument component
         if(transform.GetComponent<UIDocument>() != null)
         {
@@ -119,6 +123,7 @@ public class buttonManager_3D : MonoBehaviour
     void headTogglePressed()//toggle1
     {
         headToggleIsOn = !headToggleIsOn;
+        humanBodyTrackerSelfmade.changeTrackingStatus("head");
 
         if(headToggleIsOn)//CHECKED
         {
@@ -134,14 +139,19 @@ public class buttonManager_3D : MonoBehaviour
     void shoulderTogglePressed()//toggle2
     {
         shoulderToggleIsOn = !shoulderToggleIsOn;
+        humanBodyTrackerSelfmade.changeTrackingStatus("shoulders");
 
         if(shoulderToggleIsOn)//CHECKED
         {
             toggle2.style.backgroundImage = checkedImage;
+            humanBodyTrackerSelfmade.rightShoulder.GetComponent<Renderer>().material.color = Color.green;
+            humanBodyTrackerSelfmade.leftShoulder.GetComponent<Renderer>().material.color = Color.green;
         }
         else//NOT CHECKED
         {
             toggle2.style.backgroundImage = uncheckedImage;
+            humanBodyTrackerSelfmade.rightShoulder.GetComponent<Renderer>().material.color = Color.white;
+            humanBodyTrackerSelfmade.leftShoulder.GetComponent<Renderer>().material.color = Color.white;
         }
     }
 
