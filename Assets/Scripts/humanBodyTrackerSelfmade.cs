@@ -13,7 +13,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 
     
     //BONES
-    [HideInInspector]public GameObject Head;
+    [HideInInspector]public GameObject head;
     [HideInInspector]public GameObject leftShoulder;
     [HideInInspector]public GameObject rightShoulder;
     [HideInInspector]public GameObject rightHip;
@@ -120,7 +120,14 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 
                 bonesToTrack = boneController.skeletonRoot.GetComponentsInChildren<boneToTrack>();
 
-                checkAngles(bonesToTrack);
+                if(isShouldersTracked)
+                {
+                    checkShoulderAngles(bonesToTrack);
+                }else
+                {
+                    debugText.text = $"Meklē cilvēka ķermeni... \n";
+                }
+                
                 //foreach (boneToTrack boneToTrack in bonesToTrack)
                 //{
                 //    debugText.text = $"Updated Bone: {boneToTrack.transform.parent.name} \n";
@@ -150,7 +157,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         foreach (boneToTrack bone in bones)
         {
             if (bone.transform.parent.name == "Head")
-                Head = bone.gameObject;
+                head = bone.gameObject;
 
             if (bone.transform.parent.name == "RightArm")
                 rightShoulder = bone.gameObject;
@@ -172,10 +179,8 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         }
     }
 
-    private void checkAngles(boneToTrack[] bones)
+    private void checkShoulderAngles(boneToTrack[] bones)
     {
-        
-
         //debugText.text = $" Bone 1: {leftArm} and Bone 2: {rightArm} \n";
         // rightShoulder.GetComponent<Renderer>().material.color = Color.green;
         // leftShoulder.GetComponent<Renderer>().material.color = Color.green;
@@ -188,7 +193,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         line.SetPosition(0, leftShoulder.transform.position);
         line.SetPosition(1, rightShoulder.transform.position);
 
-        debugText.text = "ANGLE: " + (angle - 90).ToString("F1");
+        debugText.text = "ANGLE: " + (angle - 90).ToString("F2");
     }
 
     public bool isHeadTracked = false;
@@ -198,7 +203,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
     public bool isAnklesTracked = false;
 
 
-    public void changeTrackingStatus(string boneName)
+    public void changeTrackingStatus(string boneName)//TRACKING OF BONES ON|OFF
     {
         switch (boneName)
         {
@@ -210,15 +215,22 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
                 print("Pressed shoulders");
                 isShouldersTracked = !isShouldersTracked;
                 break;
+            case "hips":
+                print("Pressed hips");
+                isHipsTracked = !isHipsTracked;
+                break;
+            case "knees":
+                print("Pressed knees");
+                isKneesTracked = !isKneesTracked;
+                break;
+            case "ankles":
+                print("Pressed ankles");
+                isAnklesTracked = !isKneesTracked;
+                break;
             default:
                 print("Incorrect name of bones");
                 break;
         }
-    }
-
-    private void colorActiveBones()
-    {
-
     }
 
 }

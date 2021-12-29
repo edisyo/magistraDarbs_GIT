@@ -20,8 +20,8 @@ public class buttonManager_3D : MonoBehaviour
     Button toggle4;
     Button toggle5;
 
-    Texture2D checkedImage;
-    Texture2D uncheckedImage;
+    public Texture2D checkedImage;
+    public Texture2D uncheckedImage;
 
 
     private void Awake() 
@@ -79,8 +79,6 @@ public class buttonManager_3D : MonoBehaviour
         if (settingsPanel != null)
             settingsPanel.style.display = DisplayStyle.None;
 
-        checkedImage = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/Materials/Images/white_circle_checked.png", typeof(Texture2D));
-        uncheckedImage = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/Materials/Images/white_circle.png", typeof(Texture2D));
     }
     void Start()
     {
@@ -128,10 +126,14 @@ public class buttonManager_3D : MonoBehaviour
         if(headToggleIsOn)//CHECKED
         {
             toggle1.style.backgroundImage = checkedImage;
+            humanBodyTrackerSelfmade.isHeadTracked = true;
+            humanBodyTrackerSelfmade.head.GetComponent<Renderer>().material.color = Color.green;
         }
         else//NOT CHECKED
         {
             toggle1.style.backgroundImage = uncheckedImage;
+            humanBodyTrackerSelfmade.isHeadTracked = false;
+            humanBodyTrackerSelfmade.head.GetComponent<Renderer>().material.color = Color.white;
         }
     }
 
@@ -144,12 +146,14 @@ public class buttonManager_3D : MonoBehaviour
         if(shoulderToggleIsOn)//CHECKED
         {
             toggle2.style.backgroundImage = checkedImage;
+            humanBodyTrackerSelfmade.isShouldersTracked = true;
             humanBodyTrackerSelfmade.rightShoulder.GetComponent<Renderer>().material.color = Color.green;
             humanBodyTrackerSelfmade.leftShoulder.GetComponent<Renderer>().material.color = Color.green;
         }
         else//NOT CHECKED
         {
             toggle2.style.backgroundImage = uncheckedImage;
+            humanBodyTrackerSelfmade.isShouldersTracked = false;
             humanBodyTrackerSelfmade.rightShoulder.GetComponent<Renderer>().material.color = Color.white;
             humanBodyTrackerSelfmade.leftShoulder.GetComponent<Renderer>().material.color = Color.white;
         }
@@ -162,10 +166,16 @@ public class buttonManager_3D : MonoBehaviour
         if(hipsToggleIsOn)//CHECKED
         {
             toggle3.style.backgroundImage = checkedImage;
+            humanBodyTrackerSelfmade.isHipsTracked = true;
+            humanBodyTrackerSelfmade.rightHip.GetComponent<Renderer>().material.color = Color.green;
+            humanBodyTrackerSelfmade.leftHip.GetComponent<Renderer>().material.color = Color.green;
         }
         else//NOT CHECKED
         {
             toggle3.style.backgroundImage = uncheckedImage;
+            humanBodyTrackerSelfmade.isHipsTracked = false;
+            humanBodyTrackerSelfmade.rightHip.GetComponent<Renderer>().material.color = Color.white;
+            humanBodyTrackerSelfmade.leftHip.GetComponent<Renderer>().material.color = Color.white;
         }
     }
 
@@ -176,10 +186,16 @@ public class buttonManager_3D : MonoBehaviour
         if(kneesToggleIsOn)//CHECKED
         {
             toggle4.style.backgroundImage = checkedImage;
+            humanBodyTrackerSelfmade.isKneesTracked = true;
+            humanBodyTrackerSelfmade.rightKnee.GetComponent<Renderer>().material.color = Color.green;
+            humanBodyTrackerSelfmade.leftKnee.GetComponent<Renderer>().material.color = Color.green;
         }
         else//NOT CHECKED
         {
             toggle4.style.backgroundImage = uncheckedImage;
+            humanBodyTrackerSelfmade.isKneesTracked = false;
+            humanBodyTrackerSelfmade.rightKnee.GetComponent<Renderer>().material.color = Color.white;
+            humanBodyTrackerSelfmade.leftKnee.GetComponent<Renderer>().material.color = Color.white;
         }
     }
 
@@ -190,10 +206,16 @@ public class buttonManager_3D : MonoBehaviour
         if(anklesToggleIsOn)//CHECKED
         {
             toggle5.style.backgroundImage = checkedImage;
+            humanBodyTrackerSelfmade.isAnklesTracked = true;
+            humanBodyTrackerSelfmade.rightAnkle.GetComponent<Renderer>().material.color = Color.green;
+            humanBodyTrackerSelfmade.leftAnkle.GetComponent<Renderer>().material.color = Color.green;
         }
         else//NOT CHECKED
         {
             toggle5.style.backgroundImage = uncheckedImage;
+            humanBodyTrackerSelfmade.isAnklesTracked = false;
+            humanBodyTrackerSelfmade.rightAnkle.GetComponent<Renderer>().material.color = Color.white;
+            humanBodyTrackerSelfmade.leftAnkle.GetComponent<Renderer>().material.color = Color.white;
         }
     }
 }
