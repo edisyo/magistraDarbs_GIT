@@ -121,15 +121,14 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 
             if (bonesToTrack != null)
             {
-                //bonesToTrack = boneController.GetComponentInChildren<boneToTrack>();
-                //debugText.text = "" + bonesToTrack.gameObject.name;
-
                 bonesToTrack = boneController.skeletonRoot.GetComponentsInChildren<boneToTrack>();
 
                 if(isShouldersTracked)
                 {
                     leftShoulder_Positions.Add(leftShoulder.transform);//GET teansforms for future calculations
-                    rightShoulder_Positions.Add(rightShoulder.transform);                
+                    rightShoulder_Positions.Add(rightShoulder.transform); 
+
+                    checkShoulderAngles();               
                     
                 }else
                 {
@@ -213,7 +212,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         line.SetPosition(0, leftShoulder.transform.position);
         line.SetPosition(1, rightShoulder.transform.position);
 
-        debugText.text = "ANGLE: " + angle.ToString("F2");
+        debugText.text = "R: " +rightShoulder_Positions.Count + " |L: " + leftShoulder_Positions.Count+ "|  ANGLE: " + angle.ToString("F2");
     }
 
     [HideInInspector]public bool isHeadTracked = false;
