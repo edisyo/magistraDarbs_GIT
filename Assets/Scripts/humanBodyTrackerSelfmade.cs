@@ -82,11 +82,6 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         buttonManager_3D = FindObjectOfType<buttonManager_3D>();
     }
 
-    private void Update() 
-    {
-        testingAngles();
-    }
-
     float lx,ly,lz,rx,ry,rz;
 
     void OnHumanBodiesChanged(ARHumanBodiesChangedEventArgs eventArgs)
