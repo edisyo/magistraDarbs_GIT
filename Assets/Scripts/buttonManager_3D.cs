@@ -23,8 +23,6 @@ public class buttonManager_3D : MonoBehaviour
     Button toggle4;
     Button toggle5;
 
-    bool startCountdown = false;
-
     public Texture2D checkedImage;
     public Texture2D uncheckedImage;
     public int timerDuration;
@@ -130,9 +128,6 @@ public class buttonManager_3D : MonoBehaviour
 
     void StartCalculating()
     {
-        humanBodyTrackerSelfmade.changeTrackingStatus("shoulders");
-        startCountdown = true;
-
         btn_openSettings.style.display = DisplayStyle.None;
         btn_startCalculating.style.display = DisplayStyle.None;
         
@@ -146,6 +141,8 @@ public class buttonManager_3D : MonoBehaviour
     {
         while (timerDuration > 0)
         {
+            humanBodyTrackerSelfmade.changeTrackingStatus("shoulders");//on
+
             timer_label.text = $" Saglabāt stāju \n" + timerDuration.ToString();
             
             yield return new WaitForSeconds(1f);
@@ -154,7 +151,8 @@ public class buttonManager_3D : MonoBehaviour
         }
 
         //END OF TIMER
-        timer_label.text = $" Proccessing results... \n ";
+        humanBodyTrackerSelfmade.changeTrackingStatus("shoulders");//off
+        timer_label.text = $" Done! \n ";
 
         btn_stopCalculating.style.display = DisplayStyle.Flex;
     }

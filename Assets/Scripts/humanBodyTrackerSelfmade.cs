@@ -136,8 +136,9 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
                         meanPositionY = transformList.position.y;
                         meanPositionZ = transformList.position.z;
                     }
-                    //checkShoulderAngles(bonesToTrack);
-                    debugText.text = $"vidējais position [{meanPositionX}, {meanPositionY}, {meanPositionZ}]";
+                    checkShoulderAngles();
+
+                    debugText.text = $"{leftShoulder_Positions.Count} |vidējais position [{meanPositionX}, {meanPositionY}, {meanPositionZ}]";
                     
                 }else
                 {
@@ -192,12 +193,8 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         }
     }
 
-    private void checkShoulderAngles(boneToTrack[] bones)
+    private void checkShoulderAngles()
     {
-        //debugText.text = $" Bone 1: {leftArm} and Bone 2: {rightArm} \n";
-        // rightShoulder.GetComponent<Renderer>().material.color = Color.green;
-        // leftShoulder.GetComponent<Renderer>().material.color = Color.green;
-
         var direction = rightShoulder.transform.position - leftShoulder.transform.position;
         var up = transform.up;
         var angle = Vector3.Angle(up,direction);
@@ -209,11 +206,11 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         debugText.text = "ANGLE: " + (angle - 90).ToString("F2");
     }
 
-    public bool isHeadTracked = false;
-    public bool isShouldersTracked = false;
-    public bool isHipsTracked = false;
-    public bool isKneesTracked = false;
-    public bool isAnklesTracked = false;
+    [HideInInspector]public bool isHeadTracked = false;
+    [HideInInspector]public bool isShouldersTracked = false;
+    [HideInInspector]public bool isHipsTracked = false;
+    [HideInInspector]public bool isKneesTracked = false;
+    [HideInInspector]public bool isAnklesTracked = false;
 
 
     public void changeTrackingStatus(string boneName)//TRACKING OF BONES ON|OFF
