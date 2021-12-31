@@ -15,6 +15,7 @@ public class buttonManager_3D : MonoBehaviour
     Button btn_saveSettings;
     Button btn_startCalculating;
     Button btn_stopCalculating;
+    Label countdown_label;
     VisualElement settingsPanel;
     Button toggle1;
     Button toggle2;
@@ -47,6 +48,7 @@ public class buttonManager_3D : MonoBehaviour
             btn_saveSettings = root.Q<UnityEngine.UIElements.Button>("SaveSettings_button");
             btn_startCalculating = root.Q<UnityEngine.UIElements.Button>("startCalculate_button");
             btn_stopCalculating =  root.Q<UnityEngine.UIElements.Button>("stopCalculate_button");
+            countdown_label =   root.Q<UnityEngine.UIElements.Label>("countdown_text");
             settingsPanel = root.Q<UnityEngine.UIElements.VisualElement>("settings_panel");
             toggle1 = root.Q<UnityEngine.UIElements.Button>("toggle1");
             toggle2 = root.Q<UnityEngine.UIElements.Button>("toggle2");
@@ -89,6 +91,9 @@ public class buttonManager_3D : MonoBehaviour
             btn_startCalculating.style.display = DisplayStyle.None;
         if (btn_stopCalculating != null)
             btn_stopCalculating.style.display = DisplayStyle.None;
+        if (countdown_label != null)
+            countdown_label.style.display = DisplayStyle.None;
+            
 
     }
     void Start()
@@ -125,6 +130,8 @@ public class buttonManager_3D : MonoBehaviour
         humanBodyTrackerSelfmade.isShouldersTracked = true;
         btn_openSettings.style.display = DisplayStyle.None;
         btn_stopCalculating.style.display = DisplayStyle.Flex;
+        countdown_label.style.display = DisplayStyle.Flex;
+        countdown_label.text = $" 5 \n Saglabāt stāju";
     }
 
     void StopCalculating()
@@ -174,7 +181,6 @@ public class buttonManager_3D : MonoBehaviour
             humanBodyTrackerSelfmade.leftShoulder.GetComponent<Renderer>().material.color = Color.green;
 
             btn_startCalculating.style.display = DisplayStyle.Flex;
-            StartCalculating();
         }
         else//NOT CHECKED
         {
