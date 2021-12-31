@@ -139,10 +139,10 @@ public class buttonManager_3D : MonoBehaviour
 
     IEnumerator TimerForCalculating()
     {
+        humanBodyTrackerSelfmade.changeTrackingStatus("shoulders");//on
+
         while (timerDuration > 0)
         {
-            humanBodyTrackerSelfmade.changeTrackingStatus("shoulders");//on
-
             timer_label.text = $" Saglabāt stāju \n" + timerDuration.ToString();
             
             yield return new WaitForSeconds(1f);

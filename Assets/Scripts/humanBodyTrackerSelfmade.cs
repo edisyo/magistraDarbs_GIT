@@ -10,6 +10,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 {
     public boneToTrack[] bonesToTrack;
     public List<Transform> leftShoulder_Positions;
+    public List<Transform> rightShoulder_Positions;
     public TextMeshProUGUI debugText;
 
     
@@ -74,11 +75,10 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         debugText.text = $"Meklē cilvēka ķermeni... \n";
         line.gameObject.SetActive(false);
         leftShoulder_Positions = new List<Transform>();
+        rightShoulder_Positions = new List<Transform>();
     }
 
-    float meanPositionX;
-    float meanPositionY;
-    float meanPositionZ;
+    float lx,ly,lz,rx,ry,rz;
 
     void OnHumanBodiesChanged(ARHumanBodiesChangedEventArgs eventArgs)
     {
@@ -128,17 +128,8 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 
                 if(isShouldersTracked)
                 {
-                    leftShoulder_Positions.Add(leftShoulder.transform);
-
-                    foreach(var transformList in leftShoulder_Positions)
-                    {
-                        meanPositionX = transformList.position.x;
-                        meanPositionY = transformList.position.y;
-                        meanPositionZ = transformList.position.z;
-                    }
-                    checkShoulderAngles();
-
-                    debugText.text = $"{leftShoulder_Positions.Count} |vidējais position [{meanPositionX}, {meanPositionY}, {meanPositionZ}]";
+                    leftShoulder_Positions.Add(leftShoulder.transform);//GET teansforms for future calculations
+                    rightShoulder_Positions.Add(rightShoulder.transform);                
                     
                 }else
                 {
@@ -195,15 +186,34 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 
     private void checkShoulderAngles()
     {
-        var direction = rightShoulder.transform.position - leftShoulder.transform.position;
-        var up = transform.up;
-        var angle = Vector3.Angle(up,direction);
+        foreach(var transformList in leftShoulder_Positions)//LEFT SHOULDER MEAN POSITION
+        {
+            lx = transformList.position.x;
+            ly = transformList.position.y;
+            lz = transformList.position.z;
+        }
+
+        foreach(var transformList in rightShoulder_Positions)//LEFT SHOULDER MEAN POSITION
+        {
+            rx = transformList.position.x;
+            ry = transformList.position.y;
+            rz = transformList.position.z;
+        }
+
+        Vector3 leftShoulderMeanPosition = new Vector3(lx,ly,lz);
+        Vector3 rightShoulderMeanPosition = new Vector3(rx,ry,rz);
+
+        //debugText.text = $"{leftShoulder_Positions.Count} |vidējais position [{meanPositionX}, {meanPositionY}, {meanPositionZ}]";
+
+        var direction = rightShoulderMeanPosition - leftShoulderMeanPosition;
+        var right = Vector3.right;
+        var angle = Vector3.SignedAngle(direction,right, Vector3.up);
 
         line.gameObject.SetActive(true);
         line.SetPosition(0, leftShoulder.transform.position);
         line.SetPosition(1, rightShoulder.transform.position);
 
-        debugText.text = "ANGLE: " + (angle - 90).ToString("F2");
+        debugText.text = "ANGLE: " + angle.ToString("F2");
     }
 
     [HideInInspector]public bool isHeadTracked = false;
