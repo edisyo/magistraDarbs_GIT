@@ -15,15 +15,15 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 
     
     //BONES
-    public GameObject head;
+    [HideInInspector] public GameObject head;
     public GameObject leftShoulder;
     public GameObject rightShoulder;
-    public GameObject rightHip;
-    public GameObject leftHip;
-    public GameObject rightKnee;
-    public GameObject leftKnee;
-    public GameObject rightAnkle;
-    public GameObject leftAnkle;
+    [HideInInspector] public GameObject rightHip;
+    [HideInInspector] public GameObject leftHip;
+    [HideInInspector] public GameObject rightKnee;
+    [HideInInspector] public GameObject leftKnee;
+    [HideInInspector] public GameObject rightAnkle;
+    [HideInInspector] public GameObject leftAnkle;
     
 
     public LineRenderer line;
@@ -216,7 +216,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         line.SetPosition(0, leftShoulder.transform.position);
         line.SetPosition(1, rightShoulder.transform.position);
 
-        buttonManager_3D.timer_label.text = $"Shoulder angle is: \n {angle}";
+        buttonManager_3D.timer_label.text = $"Shoulder angle is: {angle.ToString("F2")}";
 
         debugText.text = "R: " +rightShoulder_Positions.Count + " |L: " + leftShoulder_Positions.Count+ "|  ANGLE: " + angle.ToString("F2");
     }
@@ -256,6 +256,17 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
                 print("Incorrect name of bones");
                 break;
         }
+    }
+
+    public void resetMeanValues()
+    {
+        var initCount = leftShoulder_Positions.Count;
+        leftShoulder_Positions.Clear();
+        rightShoulder_Positions.Clear();
+
+        line.gameObject.SetActive(false);
+
+        Debug.Log($"RESETTING MEAN VALUES - Before {initCount} | Now {leftShoulder_Positions.Count}");
     }
 
 }
