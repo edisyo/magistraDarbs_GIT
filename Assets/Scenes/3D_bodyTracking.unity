@@ -462,6 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkedImage: {fileID: 2800000, guid: 2eebe8643047a9445a6f4ca042937fae, type: 3}
   uncheckedImage: {fileID: 2800000, guid: b5d50b20bdc41af4db0610472d9ef569, type: 3}
+  timerDuration: 5
 --- !u!1001 &567045163
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1051,6 +1052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bonesToTrack: []
+  leftShoulder_Positions: []
   debugText: {fileID: 299532603}
   head: {fileID: 0}
   leftShoulder: {fileID: 0}

@@ -15,7 +15,7 @@ public class buttonManager_3D : MonoBehaviour
     Button btn_saveSettings;
     Button btn_startCalculating;
     Button btn_stopCalculating;
-    Label countdown_label;
+    Label timer_label;
     VisualElement settingsPanel;
     Button toggle1;
     Button toggle2;
@@ -23,8 +23,11 @@ public class buttonManager_3D : MonoBehaviour
     Button toggle4;
     Button toggle5;
 
+    bool startCountdown = false;
+
     public Texture2D checkedImage;
     public Texture2D uncheckedImage;
+    public int timerDuration;
 
 
     private void Awake() 
@@ -48,7 +51,7 @@ public class buttonManager_3D : MonoBehaviour
             btn_saveSettings = root.Q<UnityEngine.UIElements.Button>("SaveSettings_button");
             btn_startCalculating = root.Q<UnityEngine.UIElements.Button>("startCalculate_button");
             btn_stopCalculating =  root.Q<UnityEngine.UIElements.Button>("stopCalculate_button");
-            countdown_label =   root.Q<UnityEngine.UIElements.Label>("countdown_text");
+            timer_label =   root.Q<UnityEngine.UIElements.Label>("countdown_text");
             settingsPanel = root.Q<UnityEngine.UIElements.VisualElement>("settings_panel");
             toggle1 = root.Q<UnityEngine.UIElements.Button>("toggle1");
             toggle2 = root.Q<UnityEngine.UIElements.Button>("toggle2");
@@ -91,8 +94,8 @@ public class buttonManager_3D : MonoBehaviour
             btn_startCalculating.style.display = DisplayStyle.None;
         if (btn_stopCalculating != null)
             btn_stopCalculating.style.display = DisplayStyle.None;
-        if (countdown_label != null)
-            countdown_label.style.display = DisplayStyle.None;
+        if (timer_label != null)
+            timer_label.style.display = DisplayStyle.None;
             
 
     }
@@ -104,7 +107,7 @@ public class buttonManager_3D : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 
@@ -127,11 +130,33 @@ public class buttonManager_3D : MonoBehaviour
 
     void StartCalculating()
     {
-        humanBodyTrackerSelfmade.isShouldersTracked = true;
+        humanBodyTrackerSelfmade.changeTrackingStatus("shoulders");
+        startCountdown = true;
+
         btn_openSettings.style.display = DisplayStyle.None;
+        btn_startCalculating.style.display = DisplayStyle.None;
+        
+        timer_label.style.display = DisplayStyle.Flex;
+            
+
+        StartCoroutine(TimerForCalculating());
+    }
+
+    IEnumerator TimerForCalculating()
+    {
+        while (timerDuration > 0)
+        {
+            timer_label.text = $" Saglabāt stāju \n" + timerDuration.ToString();
+            
+            yield return new WaitForSeconds(1f);
+
+            timerDuration--;
+        }
+
+        //END OF TIMER
+        timer_label.text = $" Proccessing results... \n ";
+
         btn_stopCalculating.style.display = DisplayStyle.Flex;
-        countdown_label.style.display = DisplayStyle.Flex;
-        countdown_label.text = $" 5 \n Saglabāt stāju";
     }
 
     void StopCalculating()
@@ -171,7 +196,6 @@ public class buttonManager_3D : MonoBehaviour
     void shoulderTogglePressed()//toggle2
     {
         shoulderToggleIsOn = !shoulderToggleIsOn;
-        humanBodyTrackerSelfmade.changeTrackingStatus("shoulders");
 
         if(shoulderToggleIsOn)//CHECKED
         {
@@ -185,7 +209,7 @@ public class buttonManager_3D : MonoBehaviour
         else//NOT CHECKED
         {
             toggle2.style.backgroundImage = uncheckedImage;
-            //humanBodyTrackerSelfmade.isShouldersTracked = false;
+
             humanBodyTrackerSelfmade.rightShoulder.GetComponent<Renderer>().material.color = Color.white;
             humanBodyTrackerSelfmade.leftShoulder.GetComponent<Renderer>().material.color = Color.white;
 

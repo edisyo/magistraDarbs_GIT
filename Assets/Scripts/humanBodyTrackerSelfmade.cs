@@ -9,19 +9,20 @@ using UnityEngine.XR.ARFoundation.Samples;
 public class humanBodyTrackerSelfmade : MonoBehaviour
 {
     public boneToTrack[] bonesToTrack;
+    public List<Transform> leftShoulder_Positions;
     public TextMeshProUGUI debugText;
 
     
     //BONES
-    [HideInInspector]public GameObject head;
-    [HideInInspector]public GameObject leftShoulder;
-    [HideInInspector]public GameObject rightShoulder;
-    [HideInInspector]public GameObject rightHip;
-    [HideInInspector]public GameObject leftHip;
-    [HideInInspector]public GameObject rightKnee;
-    [HideInInspector]public GameObject leftKnee;
-    [HideInInspector]public GameObject rightAnkle;
-    [HideInInspector]public GameObject leftAnkle;
+    public GameObject head;
+    public GameObject leftShoulder;
+    public GameObject rightShoulder;
+    public GameObject rightHip;
+    public GameObject leftHip;
+    public GameObject rightKnee;
+    public GameObject leftKnee;
+    public GameObject rightAnkle;
+    public GameObject leftAnkle;
     
 
     public LineRenderer line;
@@ -72,7 +73,12 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
     {
         debugText.text = $"Meklē cilvēka ķermeni... \n";
         line.gameObject.SetActive(false);
+        leftShoulder_Positions = new List<Transform>();
     }
+
+    float meanPositionX;
+    float meanPositionY;
+    float meanPositionZ;
 
     void OnHumanBodiesChanged(ARHumanBodiesChangedEventArgs eventArgs)
     {
@@ -105,7 +111,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
             boneController.ApplyBodyPose(humanBody);
         }
 
-        foreach (var humanBody in eventArgs.updated)
+        foreach (var humanBody in eventArgs.updated)//BASICALLY LIKE UPDATE FUNCTION
         {
             if (m_SkeletonTracker.TryGetValue(humanBody.trackableId, out boneController))
             {
@@ -122,8 +128,16 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 
                 if(isShouldersTracked)
                 {
-                    
-                    checkShoulderAngles(bonesToTrack);
+                    leftShoulder_Positions.Add(leftShoulder.transform);
+
+                    foreach(var transformList in leftShoulder_Positions)
+                    {
+                        meanPositionX = transformList.position.x;
+                        meanPositionY = transformList.position.y;
+                        meanPositionZ = transformList.position.z;
+                    }
+                    //checkShoulderAngles(bonesToTrack);
+                    debugText.text = $"vidējais position [{meanPositionX}, {meanPositionY}, {meanPositionZ}]";
                     
                 }else
                 {
