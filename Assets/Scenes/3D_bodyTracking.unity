@@ -1051,12 +1051,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25a5b1de811c94cde8d1cca3195390ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bonesToTrack: []
-  leftShoulder_Positions: []
   debugText: {fileID: 299532603}
   head: {fileID: 0}
-  leftShoulder: {fileID: 0}
-  rightShoulder: {fileID: 0}
+  leftShoulder: {fileID: 1946058358}
+  rightShoulder: {fileID: 1946058353}
   rightHip: {fileID: 0}
   leftHip: {fileID: 0}
   rightKnee: {fileID: 0}

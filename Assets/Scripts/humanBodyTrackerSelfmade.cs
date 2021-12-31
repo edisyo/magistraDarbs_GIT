@@ -8,9 +8,9 @@ using UnityEngine.XR.ARFoundation.Samples;
 
 public class humanBodyTrackerSelfmade : MonoBehaviour
 {
-    public boneToTrack[] bonesToTrack;
-    public List<Transform> leftShoulder_Positions;
-    public List<Transform> rightShoulder_Positions;
+    boneToTrack[] bonesToTrack;
+    List<Transform> leftShoulder_Positions;
+    List<Transform> rightShoulder_Positions;
     public TextMeshProUGUI debugText;
 
     
@@ -82,6 +82,11 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         buttonManager_3D = FindObjectOfType<buttonManager_3D>();
     }
 
+    private void Update() 
+    {
+        testingAngles();
+    }
+
     float lx,ly,lz,rx,ry,rz;
 
     void OnHumanBodiesChanged(ARHumanBodiesChangedEventArgs eventArgs)
@@ -139,10 +144,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
                     line.gameObject.SetActive(false);
                     debugText.text = $"Meklē cilvēka ķermeni... \n";
                 }
-                
-            }
-
-                    
+            }         
         }
 
         foreach (var humanBody in eventArgs.removed)
@@ -206,11 +208,15 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         Vector3 leftShoulderMeanPosition = new Vector3(lx,ly,lz);
         Vector3 rightShoulderMeanPosition = new Vector3(rx,ry,rz);
 
-        //debugText.text = $"{leftShoulder_Positions.Count} |vidējais position [{meanPositionX}, {meanPositionY}, {meanPositionZ}]";
-
         var direction = rightShoulderMeanPosition - leftShoulderMeanPosition;
-        var right = Vector3.right;
-        var angle = Vector3.SignedAngle(direction,right, Vector3.up);
+        // var right = Vector3.right;
+        // var angle = Vector3.SignedAngle(direction,right, Vector3.up);//Does not work correctly
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle = 180 - angle;
+
+        if(angle > 180)
+            angle = 360 - angle;
 
         line.gameObject.SetActive(true);
         line.SetPosition(0, leftShoulder.transform.position);
@@ -219,6 +225,25 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         buttonManager_3D.timer_label.text = $"Shoulder angle is: {angle.ToString("F2")}";
 
         debugText.text = "R: " +rightShoulder_Positions.Count + " |L: " + leftShoulder_Positions.Count+ "|  ANGLE: " + angle.ToString("F2");
+    }
+
+    public void testingAngles()
+    {
+        var direction = rightShoulder.transform.position - leftShoulder.transform.position;
+        Debug.DrawRay(leftShoulder.transform.position, direction, Color.red);
+
+        //var angle = Vector3.SignedAngle(direction,right, Vector3.up);// works good if x axis is aligned
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle = 180 - angle;
+
+        if(angle > 180)
+            angle = 360 - angle;
+
+        line.gameObject.SetActive(true);
+        line.SetPosition(0, leftShoulder.transform.position);
+        line.SetPosition(1, rightShoulder.transform.position);
+
+        debugText.text = "test angle: " + angle.ToString("F2");
     }
 
     [HideInInspector]public bool isHeadTracked = false;
