@@ -15,7 +15,7 @@ public class buttonManager_3D : MonoBehaviour
     Button btn_saveSettings;
     Button btn_startCalculating;
     Button btn_stopCalculating;
-    Label timer_label;
+    [HideInInspector] public Label timer_label;
     VisualElement settingsPanel;
     Button toggle1;
     Button toggle2;
@@ -152,7 +152,8 @@ public class buttonManager_3D : MonoBehaviour
 
         //END OF TIMER
         humanBodyTrackerSelfmade.changeTrackingStatus("shoulders");//off
-        timer_label.text = $" Done! \n ";
+        humanBodyTrackerSelfmade.checkShoulderAngles();
+        //timer_label.text = $" Done! \n ";
 
         btn_stopCalculating.style.display = DisplayStyle.Flex;
     }

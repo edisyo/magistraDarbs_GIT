@@ -28,6 +28,8 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 
     public LineRenderer line;
 
+    buttonManager_3D buttonManager_3D;
+
     [SerializeField]
     [Tooltip("The Skeleton prefab to be controlled.")]
     GameObject m_SkeletonPrefab;
@@ -76,6 +78,8 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         line.gameObject.SetActive(false);
         leftShoulder_Positions = new List<Transform>();
         rightShoulder_Positions = new List<Transform>();
+
+        buttonManager_3D = FindObjectOfType<buttonManager_3D>();
     }
 
     float lx,ly,lz,rx,ry,rz;
@@ -128,7 +132,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
                     leftShoulder_Positions.Add(leftShoulder.transform);//GET teansforms for future calculations
                     rightShoulder_Positions.Add(rightShoulder.transform); 
 
-                    checkShoulderAngles();               
+                    //checkShoulderAngles();               
                     
                 }else
                 {
@@ -183,7 +187,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         }
     }
 
-    private void checkShoulderAngles()
+    public void checkShoulderAngles()
     {
         foreach(var transformList in leftShoulder_Positions)//LEFT SHOULDER MEAN POSITION
         {
@@ -211,6 +215,8 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         line.gameObject.SetActive(true);
         line.SetPosition(0, leftShoulder.transform.position);
         line.SetPosition(1, rightShoulder.transform.position);
+
+        buttonManager_3D.timer_label.text = $"Shoulder angle is: \n {angle}";
 
         debugText.text = "R: " +rightShoulder_Positions.Count + " |L: " + leftShoulder_Positions.Count+ "|  ANGLE: " + angle.ToString("F2");
     }
