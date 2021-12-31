@@ -122,17 +122,15 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 
                 if(isShouldersTracked)
                 {
+                    
                     checkShoulderAngles(bonesToTrack);
+                    
                 }else
                 {
                     line.gameObject.SetActive(false);
                     debugText.text = $"Meklē cilvēka ķermeni... \n";
                 }
                 
-                //foreach (boneToTrack boneToTrack in bonesToTrack)
-                //{
-                //    debugText.text = $"Updated Bone: {boneToTrack.transform.parent.name} \n";
-                //}
             }
 
                     

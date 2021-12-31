@@ -12,7 +12,9 @@ public class buttonManager_3D : MonoBehaviour
     VisualElement root;
     Button btn_back3D;
     Button btn_openSettings;
-    Button btn_closeSettings;
+    Button btn_saveSettings;
+    Button btn_startCalculating;
+    Button btn_stopCalculating;
     VisualElement settingsPanel;
     Button toggle1;
     Button toggle2;
@@ -42,7 +44,9 @@ public class buttonManager_3D : MonoBehaviour
         {
             btn_back3D = root.Q<UnityEngine.UIElements.Button>("Back_button");
             btn_openSettings = root.Q<UnityEngine.UIElements.Button>("OpenSettings_button");
-            btn_closeSettings = root.Q<UnityEngine.UIElements.Button>("CloseSettings_button");
+            btn_saveSettings = root.Q<UnityEngine.UIElements.Button>("SaveSettings_button");
+            btn_startCalculating = root.Q<UnityEngine.UIElements.Button>("startCalculate_button");
+            btn_stopCalculating =  root.Q<UnityEngine.UIElements.Button>("stopCalculate_button");
             settingsPanel = root.Q<UnityEngine.UIElements.VisualElement>("settings_panel");
             toggle1 = root.Q<UnityEngine.UIElements.Button>("toggle1");
             toggle2 = root.Q<UnityEngine.UIElements.Button>("toggle2");
@@ -52,11 +56,15 @@ public class buttonManager_3D : MonoBehaviour
         }
         
         if(btn_back3D != null)
-            btn_back3D.clicked += toMainMenuButtonPressed;
+            btn_back3D.clicked += ToMainMenuButtonPressed;
         if(btn_openSettings != null)
-            btn_openSettings.clicked += openSettings;
-        if(btn_closeSettings != null)
-            btn_closeSettings.clicked += closeSettings;
+            btn_openSettings.clicked += OpenSettings;
+        if(btn_saveSettings != null)
+            btn_saveSettings.clicked += SaveSettings;
+        if(btn_startCalculating != null)
+            btn_startCalculating.clicked += StartCalculating;
+        if(btn_stopCalculating != null)
+            btn_stopCalculating.clicked += StopCalculating;
 
         if(toggle1 != null)
             toggle1.clicked += headTogglePressed;
@@ -74,10 +82,13 @@ public class buttonManager_3D : MonoBehaviour
             btn_back3D.style.display = DisplayStyle.Flex;//TURN ON
         if (btn_openSettings != null)
             btn_openSettings.style.display = DisplayStyle.Flex;
-        if (btn_closeSettings != null)
-            btn_closeSettings.style.display = DisplayStyle.None;//TURN OFF
+
         if (settingsPanel != null)
-            settingsPanel.style.display = DisplayStyle.None;
+            settingsPanel.style.display = DisplayStyle.None;//TURN OFF
+        if (btn_startCalculating != null)
+            btn_startCalculating.style.display = DisplayStyle.None;
+        if (btn_stopCalculating != null)
+            btn_stopCalculating.style.display = DisplayStyle.None;
 
     }
     void Start()
@@ -92,23 +103,35 @@ public class buttonManager_3D : MonoBehaviour
     }
 
 
-    void toMainMenuButtonPressed()
+    void ToMainMenuButtonPressed()
     {
         SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
     }
 
-    void openSettings()
+    void OpenSettings()
     {
         settingsPanel.style.display = DisplayStyle.Flex;
         btn_openSettings.style.display = DisplayStyle.None;
-        btn_closeSettings.style.display = DisplayStyle.Flex;
     }
 
-    void closeSettings()
+    void SaveSettings()
     {
         settingsPanel.style.display = DisplayStyle.None;
         btn_openSettings.style.display = DisplayStyle.Flex;
-        btn_closeSettings.style.display = DisplayStyle.None;
+    }
+
+    void StartCalculating()
+    {
+        humanBodyTrackerSelfmade.isShouldersTracked = true;
+        btn_openSettings.style.display = DisplayStyle.None;
+        btn_stopCalculating.style.display = DisplayStyle.Flex;
+    }
+
+    void StopCalculating()
+    {
+        humanBodyTrackerSelfmade.isShouldersTracked = false;
+        btn_openSettings.style.display = DisplayStyle.Flex;
+        btn_stopCalculating.style.display = DisplayStyle.None;
     }
 
     //FOR TOGGLE BUTTONS
@@ -146,16 +169,21 @@ public class buttonManager_3D : MonoBehaviour
         if(shoulderToggleIsOn)//CHECKED
         {
             toggle2.style.backgroundImage = checkedImage;
-            humanBodyTrackerSelfmade.isShouldersTracked = true;
-            humanBodyTrackerSelfmade.rightShoulder.GetComponent<Renderer>().material.color = Color.green;
+            
+            humanBodyTrackerSelfmade.rightShoulder.GetComponent<Renderer>().material.color = Color.green;//just to see what is being tracked
             humanBodyTrackerSelfmade.leftShoulder.GetComponent<Renderer>().material.color = Color.green;
+
+            btn_startCalculating.style.display = DisplayStyle.Flex;
+            StartCalculating();
         }
         else//NOT CHECKED
         {
             toggle2.style.backgroundImage = uncheckedImage;
-            humanBodyTrackerSelfmade.isShouldersTracked = false;
+            //humanBodyTrackerSelfmade.isShouldersTracked = false;
             humanBodyTrackerSelfmade.rightShoulder.GetComponent<Renderer>().material.color = Color.white;
             humanBodyTrackerSelfmade.leftShoulder.GetComponent<Renderer>().material.color = Color.white;
+
+            btn_startCalculating.style.display = DisplayStyle.None;
         }
     }
 

@@ -5,6 +5,34 @@
 }
 
 .whichToTrack_toggleButton {
-    background-color: rgba(255, 0, 0, 255);
-    -unity-background-image-tint-color: rgba(255, 0, 0, 255);
+    background-color: rgb(255, 0, 0);
+    -unity-background-image-tint-color: rgb(255, 0, 0);
+}
+
+.3dTracking_UI_buttons {
+    position: absolute;
+    top: 2%;
+    right: auto;
+    width: 17%;
+    height: 4%;
+    font-size: 26px;
+    -unity-font-style: bold;
+    color: rgb(70, 70, 70);
+    background-color: rgba(255, 255, 255, 0.67);
+    border-left-width: 0;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    -unity-text-outline-width: 0;
+    text-shadow: 0 0 0 rgb(0, 0, 0);
+    border-left-color: rgb(48, 48, 48);
+    border-right-color: rgb(48, 48, 48);
+    border-top-color: rgb(48, 48, 48);
+    border-bottom-color: rgb(48, 48, 48);
+    display: flex;
+    left: 4%;
 }
