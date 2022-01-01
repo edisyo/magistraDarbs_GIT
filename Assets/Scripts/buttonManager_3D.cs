@@ -26,7 +26,6 @@ public class buttonManager_3D : MonoBehaviour
     public Texture2D checkedImage;
     public Texture2D uncheckedImage;
     public int timerDuration;
-    int initialTimerDuration;
 
 
     private void Awake() 
@@ -96,7 +95,7 @@ public class buttonManager_3D : MonoBehaviour
         if (timer_label != null)
             timer_label.style.display = DisplayStyle.None;
             
-        initialTimerDuration = timerDuration;
+
     }
     void Start()
     {
@@ -131,7 +130,6 @@ public class buttonManager_3D : MonoBehaviour
     {
         btn_openSettings.style.display = DisplayStyle.None;
         btn_startCalculating.style.display = DisplayStyle.None;
-        btn_back3D.style.display = DisplayStyle.None;
         
         timer_label.style.display = DisplayStyle.Flex;
             
@@ -164,23 +162,7 @@ public class buttonManager_3D : MonoBehaviour
     {
         humanBodyTrackerSelfmade.isShouldersTracked = false;
         btn_openSettings.style.display = DisplayStyle.Flex;
-        btn_back3D.style.display = DisplayStyle.Flex;
         btn_stopCalculating.style.display = DisplayStyle.None;
-
-        timerDuration = initialTimerDuration;
-
-        humanBodyTrackerSelfmade.resetMeanValues();
-
-        timer_label.text = "";
-        timer_label.style.display = DisplayStyle.None;
-
-        StartCoroutine(delayTurnOnButton());
-    }
-
-    IEnumerator delayTurnOnButton()
-    {
-        yield return new WaitForSeconds(1f);
-        btn_startCalculating.style.display = DisplayStyle.Flex;
     }
 
     //FOR TOGGLE BUTTONS
