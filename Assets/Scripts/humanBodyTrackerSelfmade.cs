@@ -140,7 +140,6 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
                     rightShoulder_Positions.Add(rightShoulder.transform); 
                 }else
                 {
-                    line.gameObject.SetActive(false);
                     debugText.text = $"Meklē cilvēka ķermeni... \n";
                 }   
             }   
