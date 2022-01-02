@@ -187,13 +187,20 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         }
     }
 
+    float sumLx = 0;
     public void checkShoulderAngles()
     {
+        
         foreach(var transformList in leftShoulder_Positions)//LEFT SHOULDER MEAN POSITION
         {
             lx = transformList.position.x;
             ly = transformList.position.y;
             lz = transformList.position.z;
+
+            sumLx += lx;
+
+            Debug.Log("sumLx: " + sumLx);
+
         }
 
         foreach(var transformList in rightShoulder_Positions)//LEFT SHOULDER MEAN POSITION
@@ -203,14 +210,23 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
             rz = transformList.position.z;
         }
 
-        Vector3 leftShoulderMeanPosition = new Vector3(lx,ly,lz);
+        float meanLx = sumLx /  leftShoulder_Positions.Count;
+        Debug.Log($"meanLx = {meanLx} | {sumLx} / {leftShoulder_Positions.Count}");
+
+        Vector3 leftShoulderMeanPosition = new Vector3(meanLx,ly,lz);
         Vector3 rightShoulderMeanPosition = new Vector3(rx,ry,rz);
 
         //debugText.text = $"{leftShoulder_Positions.Count} |vidējais position [{meanPositionX}, {meanPositionY}, {meanPositionZ}]";
 
         var direction = rightShoulderMeanPosition - leftShoulderMeanPosition;
-        var right = Vector3.right;
-        var angle = Vector3.SignedAngle(direction,right, Vector3.up);
+        // var right = Vector3.right;
+        // var angle = Vector3.SignedAngle(direction,right, Vector3.up);
+
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle = 180 - angle;
+
+        if(angle > 180)
+            angle = 360 - angle;
 
         line.gameObject.SetActive(true);
         line.SetPosition(0, leftShoulder.transform.position);
@@ -219,6 +235,36 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         buttonManager_3D.timer_label.text = $"Shoulder angle is: \n {angle}";
 
         debugText.text = "R: " +rightShoulder_Positions.Count + " |L: " + leftShoulder_Positions.Count+ "|  ANGLE: " + angle.ToString("F2");
+    }
+
+    public void testingAngles()
+    {
+        var direction = rightShoulder.transform.position - leftShoulder.transform.position;
+        Debug.DrawRay(leftShoulder.transform.position, direction, Color.red);
+
+        //var angle = Vector3.SignedAngle(direction,right, Vector3.up);// works good if x axis is aligned
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle = 180 - angle;
+
+        if(angle > 180)
+            angle = 360 - angle;
+
+        line.gameObject.SetActive(true);
+        line.SetPosition(0, leftShoulder.transform.position);
+        line.SetPosition(1, rightShoulder.transform.position);
+
+        debugText.text = "test angle: " + angle.ToString("F2");
+    }
+
+    public void resetMeanValues()
+    {
+        var initCount = leftShoulder_Positions.Count;
+        leftShoulder_Positions.Clear();
+        rightShoulder_Positions.Clear();
+
+        line.gameObject.SetActive(false);
+
+        Debug.Log($"RESETTING MEAN VALUES - Before {initCount} | Now {leftShoulder_Positions.Count}");
     }
 
     [HideInInspector]public bool isHeadTracked = false;
