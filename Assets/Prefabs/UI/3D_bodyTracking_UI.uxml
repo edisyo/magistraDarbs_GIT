@@ -27,12 +27,28 @@
                     </ui:VisualElement>
                 </ui:VisualElement>
             </ui:Label>
-            <ui:Label text="• Cik sekundes saglabāt stāju •" display-tooltip-when-elided="true" name="whichToTrack_text" style="width: 100%; height: 14%; -unity-text-align: upper-center; font-size: 50px; -unity-font-style: bold; background-color: rgba(152, 152, 152, 0); color: rgb(150, 85, 255);">
+            <ui:Label text="• Cik sekundes saglabāt stāju •" display-tooltip-when-elided="true" name="forHowLongToTrack_text" style="width: 100%; height: 14%; -unity-text-align: upper-center; font-size: 50px; -unity-font-style: bold; background-color: rgba(152, 152, 152, 0); color: rgb(150, 85, 255);">
                 <ui:VisualElement name="background_1" style="background-color: rgba(255, 255, 255, 0); width: 100%; height: 100%; padding-top: 0; padding-right: 0; margin-top: 7%; flex-direction: column; color: rgb(255, 255, 255); font-size: 50px;">
                     <ui:VisualElement name="placeForText" style="background-color: rgba(255, 255, 255, 0); width: 100%; height: 50%; padding-top: 0; padding-right: 0; margin-top: 0; flex-direction: row; margin-left: 0; margin-right: 0; margin-bottom: 0; color: rgb(156, 156, 156);">
-                        <ui:Label text="Galva" display-tooltip-when-elided="true" name="text1" class="whichToTrack_toggleText" style="flex-shrink: 1;" />
+                        <ui:Label text="minValue" display-tooltip-when-elided="true" name="minValue" class="whichToTrack_toggleText" style="flex-shrink: 1; align-items: auto; -unity-text-align: middle-left; font-size: 23px;" />
+                        <ui:Label text="value" display-tooltip-when-elided="true" name="chosenValue" class="whichToTrack_toggleText" style="flex-shrink: 1; align-items: auto; -unity-text-align: middle-center; font-size: 40px;" />
+                        <ui:Label text="MaxValue" display-tooltip-when-elided="true" name="maxValue" class="whichToTrack_toggleText" style="flex-shrink: 1; -unity-text-align: middle-right; font-size: 23px;" />
                     </ui:VisualElement>
-                    <ui:VisualElement name="placeForToggles" style="background-color: rgba(255, 255, 255, 0); width: 100%; height: 50%; padding-top: 0; padding-right: 0; margin-top: 0; flex-direction: row; margin-left: 0; margin-right: 0; margin-bottom: 0; align-items: center; justify-content: center; flex-grow: 1;" />
+                    <ui:VisualElement name="placeForSlider" style="background-color: rgba(255, 255, 255, 0); width: 100%; height: 50%; padding-top: 0; padding-right: 0; margin-top: 0; flex-direction: row; margin-left: 0; margin-right: 0; margin-bottom: 0; align-items: center; justify-content: center; flex-grow: 1;">
+                        <ui:SliderInt picking-mode="Ignore" value="5" high-value="10" low-value="1" show-input-field="false" name="timerSlider" style="font-size: 35px; flex-grow: 1; flex-shrink: 1; height: 100%; width: 100%;" />
+                    </ui:VisualElement>
+                </ui:VisualElement>
+            </ui:Label>
+            <ui:Label text="• Pieļaujamais plecu leņķis •" display-tooltip-when-elided="true" name="angleMargin_text" style="width: 100%; height: 14%; -unity-text-align: upper-center; font-size: 50px; -unity-font-style: bold; background-color: rgba(152, 152, 152, 0); color: rgb(150, 85, 255);">
+                <ui:VisualElement name="background_1" style="background-color: rgba(255, 255, 255, 0); width: 100%; height: 100%; padding-top: 0; padding-right: 0; margin-top: 7%; flex-direction: column; color: rgb(255, 255, 255); font-size: 50px;">
+                    <ui:VisualElement name="placeForText" style="background-color: rgba(255, 255, 255, 0); width: 100%; height: 50%; padding-top: 0; padding-right: 0; margin-top: 0; flex-direction: row; margin-left: 0; margin-right: 0; margin-bottom: 0; color: rgb(156, 156, 156);">
+                        <ui:Label text="minValue" display-tooltip-when-elided="true" name="minValueMargin" class="whichToTrack_toggleText" style="flex-shrink: 1; align-items: auto; -unity-text-align: middle-left; font-size: 23px;" />
+                        <ui:Label text="value" display-tooltip-when-elided="true" name="chosenValueMargin" class="whichToTrack_toggleText" style="flex-shrink: 1; align-items: auto; -unity-text-align: middle-center; font-size: 40px;" />
+                        <ui:Label text="MaxValue" display-tooltip-when-elided="true" name="maxValueMargin" class="whichToTrack_toggleText" style="flex-shrink: 1; -unity-text-align: middle-right; font-size: 23px;" />
+                    </ui:VisualElement>
+                    <ui:VisualElement name="placeForSlider" style="background-color: rgba(255, 255, 255, 0); width: 100%; height: 50%; padding-top: 0; padding-right: 0; margin-top: 0; flex-direction: row; margin-left: 0; margin-right: 0; margin-bottom: 0; align-items: center; justify-content: center; flex-grow: 1;">
+                        <ui:SliderInt picking-mode="Ignore" value="5" high-value="10" low-value="1" show-input-field="false" name="marginSlider" style="font-size: 35px; flex-grow: 1; flex-shrink: 1; height: 100%; width: 100%;" />
+                    </ui:VisualElement>
                 </ui:VisualElement>
             </ui:Label>
             <ui:Button text="SAGLABĀT" display-tooltip-when-elided="true" name="SaveSettings_button" style="position: relative; top: auto; right: auto; width: 50%; height: 3%; font-size: 26px; -unity-font-style: bold; color: rgb(255, 255, 255); background-color: rgba(255, 255, 255, 0.14); border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 10px; border-bottom-left-radius: 10px; border-top-right-radius: 10px; border-bottom-right-radius: 10px; -unity-text-outline-width: 0; text-shadow: 0 0 0 rgb(0, 0, 0); border-left-color: rgb(48, 48, 48); border-right-color: rgb(48, 48, 48); border-top-color: rgb(48, 48, 48); border-bottom-color: rgb(48, 48, 48); display: flex; align-items: center; justify-content: flex-start; flex-shrink: 0; flex-grow: 0; padding-top: 10px; margin-top: 10%;" />

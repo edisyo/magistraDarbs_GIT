@@ -89,7 +89,8 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 
     private void Update() 
     {
-        testingAngles();    
+        if(rightShoulder != null && leftShoulder != null)
+            testingAngles();    
     }
 
     void OnHumanBodiesChanged(ARHumanBodiesChangedEventArgs eventArgs)
@@ -236,8 +237,8 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         Vector3 leftShoulderMeanPosition = new Vector3(meanLx,meanLy,meanLz);
         Vector3 rightShoulderMeanPosition = new Vector3(meanRx,meanRy,meanRz);
 
-        Debug.Log($"mean y pos L:{leftShoulderMeanPosition.y} and R:{rightShoulderMeanPosition.y}");
-        Debug.Log($"total count L:{leftShoulder_Positions.Count} and R:{rightShoulder_Positions.Count}");
+        Debug.Log($"abc mean y pos L:{leftShoulderMeanPosition.y} and R:{rightShoulderMeanPosition.y}");
+        Debug.Log($"abc total count L:{leftShoulder_Positions.Count} and R:{rightShoulder_Positions.Count}");
 
         //debugText.text = $"{leftShoulder_Positions.Count} |vidējais position [{meanPositionX}, {meanPositionY}, {meanPositionZ}]";
 
@@ -255,9 +256,19 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         line.SetPosition(0, leftShoulder.transform.position);
         line.SetPosition(1, rightShoulder.transform.position);
 
-        buttonManager_3D.timer_label.text = $"Shoulder angle is: \n {angle}";
+        buttonManager_3D.timer_label.text = $"Leņķis starp pleciem ir: {angle}";
 
-        debugText.text = "R: " +rightShoulder_Positions.Count + " |L: " + leftShoulder_Positions.Count+ "|  ANGLE: " + angle.ToString("F2");
+        //TODO
+        //if ar pielaujamo lenki (uztaisit vel vienu UI slideri ar pielaujamo lenki). ja ieklaujas pielaujama lenki, tad zala krasa. Ja neieklaujas, tad sarkana.
+        if(angle <= buttonManager_3D.initialShoulderMargin)
+        {
+            Debug.Log($"abc Good angle. Angle{angle} | margin {buttonManager_3D.initialShoulderMargin}");
+        }else
+        {
+            Debug.Log($"abc Bad angle. Angle{angle} | margin {buttonManager_3D.initialShoulderMargin}");
+        }
+
+        //debugText.text = "R: " +rightShoulder_Positions.Count + " |L: " + leftShoulder_Positions.Count+ "|  ANGLE: " + angle.ToString("F2");
     }
 
     public void testingAngles()

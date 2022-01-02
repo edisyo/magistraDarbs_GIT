@@ -16,6 +16,14 @@ public class buttonManager_3D : MonoBehaviour
     Button btn_startCalculating;
     Button btn_stopCalculating;
     [HideInInspector] public Label timer_label;
+    Label minValue_label;
+    Label chosenValue_label;
+    Label maxValue_label;
+    SliderInt timerSlider;
+    Label minValueMargin_label;
+    Label chosenValueMargin_label;
+    Label maxValueMargin_label;
+    SliderInt marginSlider;
     VisualElement settingsPanel;
     Button toggle1;
     Button toggle2;
@@ -25,8 +33,9 @@ public class buttonManager_3D : MonoBehaviour
 
     public Texture2D checkedImage;
     public Texture2D uncheckedImage;
-    public int timerDuration;
+    int timerDuration;
     int initialTimerDuration;
+    [HideInInspector]public int initialShoulderMargin;
 
 
     private void Awake() 
@@ -57,6 +66,15 @@ public class buttonManager_3D : MonoBehaviour
             toggle3 = root.Q<UnityEngine.UIElements.Button>("toggle3");
             toggle4 = root.Q<UnityEngine.UIElements.Button>("toggle4");
             toggle5 = root.Q<UnityEngine.UIElements.Button>("toggle5");
+            minValue_label =   root.Q<UnityEngine.UIElements.Label>("minValue");
+            chosenValue_label =   root.Q<UnityEngine.UIElements.Label>("chosenValue");
+            maxValue_label =   root.Q<UnityEngine.UIElements.Label>("maxValue");
+            timerSlider = root.Q<UnityEngine.UIElements.SliderInt>("timerSlider");
+            minValueMargin_label =   root.Q<UnityEngine.UIElements.Label>("minValueMargin");
+            chosenValueMargin_label =   root.Q<UnityEngine.UIElements.Label>("chosenValueMargin");
+            maxValueMargin_label =   root.Q<UnityEngine.UIElements.Label>("maxValueMargin");
+            marginSlider = root.Q<UnityEngine.UIElements.SliderInt>("marginSlider");
+
         }
         
         if(btn_back3D != null)
@@ -96,19 +114,29 @@ public class buttonManager_3D : MonoBehaviour
         if (timer_label != null)
             timer_label.style.display = DisplayStyle.None;
         
-        initialTimerDuration = timerDuration;
-            
-
+        
     }
     void Start()
     {
-        
+        minValue_label.text = timerSlider.lowValue.ToString();
+        maxValue_label.text = timerSlider.highValue.ToString();
+        chosenValue_label.text = timerSlider.value.ToString();
+        initialTimerDuration = Mathf.RoundToInt(timerSlider.value);
+
+        minValueMargin_label.text = marginSlider.lowValue.ToString();
+        maxValueMargin_label.text = marginSlider.highValue.ToString();
+        chosenValueMargin_label.text = marginSlider.value.ToString();
+        initialShoulderMargin = marginSlider.value;
     }
+
 
     // Update is called once per frame
     void Update()
     {
-
+        chosenValue_label.text = timerSlider.value.ToString();//pose duration
+        initialTimerDuration = Mathf.RoundToInt(timerSlider.value);
+        chosenValueMargin_label.text = marginSlider.value.ToString();//shoulder angle margin
+        initialShoulderMargin = marginSlider.value;
     }
 
 
@@ -137,7 +165,7 @@ public class buttonManager_3D : MonoBehaviour
         
         timer_label.style.display = DisplayStyle.Flex;
             
-
+        timerDuration = initialTimerDuration;
         StartCoroutine(TimerForCalculating());
     }
 
