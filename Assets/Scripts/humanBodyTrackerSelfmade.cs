@@ -93,7 +93,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
             if (!m_SkeletonTracker.TryGetValue(humanBody.trackableId, out boneController))
             {
                 //Debug.Log($"Adding a new skeleton [{humanBody.trackableId}].");
-                var newSkeletonGO = Instantiate(skeletonPrefab, humanBody.transform);
+                var newSkeletonGO = Instantiate(m_SkeletonPrefab, humanBody.transform);
 
                 if (bonesToTrack == null)
                 {
