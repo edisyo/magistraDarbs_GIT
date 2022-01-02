@@ -253,16 +253,18 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         line.SetPosition(0, leftShoulder.transform.position);
         line.SetPosition(1, rightShoulder.transform.position);
 
-        buttonManager_3D.timer_label.text = $"Leņķis starp pleciem ir: {angle}";
-
         //TODO
         //if ar pielaujamo lenki (uztaisit vel vienu UI slideri ar pielaujamo lenki). ja ieklaujas pielaujama lenki, tad zala krasa. Ja neieklaujas, tad sarkana.
         if(angle <= buttonManager_3D.initialShoulderMargin)
         {
             Debug.Log($"abc Good angle. Angle{angle} | margin {buttonManager_3D.initialShoulderMargin}");
+            buttonManager_3D.timer_label.text = $"Pieļaujams leņķis: {angle.ToString("F2")}";
+            buttonManager_3D.timer_label.style.color = Color.green;
         }else
         {
             Debug.Log($"abc Bad angle. Angle{angle} | margin {buttonManager_3D.initialShoulderMargin}");
+            buttonManager_3D.timer_label.text = $"Nav pieļaujams: {angle.ToString("F2")}";
+            buttonManager_3D.timer_label.style.color = Color.red;
         }
 
         //debugText.text = "R: " +rightShoulder_Positions.Count + " |L: " + leftShoulder_Positions.Count+ "|  ANGLE: " + angle.ToString("F2");
@@ -296,6 +298,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         line.gameObject.SetActive(false);
 
         sumLx = sumLy = sumLz = sumRx = sumRy = sumRz = 0;
+        buttonManager_3D.timer_label.style.color = Color.white;
 
         Debug.Log($"RESETTING MEAN VALUES - Before {initCount} | Now {leftShoulder_Positions.Count}");
     }
