@@ -462,7 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkedImage: {fileID: 2800000, guid: 2eebe8643047a9445a6f4ca042937fae, type: 3}
   uncheckedImage: {fileID: 2800000, guid: b5d50b20bdc41af4db0610472d9ef569, type: 3}
-  timerDuration: 5
+  initialShoulderMargin: 0
 --- !u!1 &656880745
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,7 +813,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1368874961
 RectTransform:
   m_ObjectHideFlags: 0

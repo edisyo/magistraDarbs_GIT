@@ -63,9 +63,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 
     void OnEnable()
     {
-
         humanBodyManager.humanBodiesChanged += OnHumanBodiesChanged;
-        
     }
 
     void OnDisable()
@@ -89,8 +87,8 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 
     private void Update() 
     {
-        if(rightShoulder != null && leftShoulder != null)
-            testingAngles();    
+        //if(rightShoulder != null && leftShoulder != null)
+            //testingAngles();    
     }
 
     void OnHumanBodiesChanged(ARHumanBodiesChangedEventArgs eventArgs)
@@ -140,18 +138,12 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
                 {
                     leftShoulder_Positions.Add(leftShoulder.transform);//GET teansforms for future calculations
                     rightShoulder_Positions.Add(rightShoulder.transform); 
-
-                    //checkShoulderAngles();               
-                    
                 }else
                 {
                     line.gameObject.SetActive(false);
                     debugText.text = $"Meklē cilvēka ķermeni... \n";
-                }
-                
-            }
-
-                    
+                }   
+            }   
         }
 
         foreach (var humanBody in eventArgs.removed)
