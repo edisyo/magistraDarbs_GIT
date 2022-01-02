@@ -215,10 +215,11 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
             ry = transformList.position.y;
             rz = transformList.position.z;
 
-            sumRx = rx;
-            sumRy = ry;
-            sumRz = rz;
+            sumRx += rx;
+            sumRy += ry;
+            sumRz += rz;
         }
+        int totalCount = leftShoulder_Positions.Count;
 
         float meanLx = sumLx /  leftShoulder_Positions.Count;
         float meanLy = sumLy / leftShoulder_Positions.Count;
@@ -228,12 +229,15 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         float meanRy = sumRy /  leftShoulder_Positions.Count;
         float meanRz = sumRz /  leftShoulder_Positions.Count;
 
-        Debug.Log($"meanLx = {meanLx} | {sumLx} / {leftShoulder_Positions.Count}");
-        Debug.Log($"meanLy = {meanLy} | {sumLy} / {leftShoulder_Positions.Count}");
-        Debug.Log($"meanLz = {meanLz} | {sumLz} / {leftShoulder_Positions.Count}");
+        // Debug.Log($"meanLx = {meanLx} | {sumLx} / {leftShoulder_Positions.Count}");//just for testing
+        // Debug.Log($"meanLy = {meanLy} | {sumLy} / {leftShoulder_Positions.Count}");
+        // Debug.Log($"meanLz = {meanLz} | {sumLz} / {leftShoulder_Positions.Count}");
 
         Vector3 leftShoulderMeanPosition = new Vector3(meanLx,meanLy,meanLz);
         Vector3 rightShoulderMeanPosition = new Vector3(meanRx,meanRy,meanRz);
+
+        Debug.Log($"mean y pos L:{leftShoulderMeanPosition.y} and R:{rightShoulderMeanPosition.y}");
+        Debug.Log($"total count L:{leftShoulder_Positions.Count} and R:{rightShoulder_Positions.Count}");
 
         //debugText.text = $"{leftShoulder_Positions.Count} |vidējais position [{meanPositionX}, {meanPositionY}, {meanPositionZ}]";
 
