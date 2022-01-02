@@ -247,10 +247,7 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         // var angle = Vector3.SignedAngle(direction,right, Vector3.up);//not working correctly
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        // angle = 180 - angle;
-
-        // if(angle > 180)
-        //     angle = 360 - angle;
+        angle = 180 - Mathf.Abs(angle);
 
         line.gameObject.SetActive(true);
         line.SetPosition(0, leftShoulder.transform.position);
