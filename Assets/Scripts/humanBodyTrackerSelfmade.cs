@@ -58,6 +58,9 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 
     Dictionary<TrackableId, BoneController> m_SkeletonTracker = new Dictionary<TrackableId, BoneController>();
 
+    float lx,ly,lz,rx,ry,rz;
+    float sumLx, sumLy, sumLz, sumRx, sumRy, sumRz;
+
     void OnEnable()
     {
 
@@ -80,9 +83,9 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         rightShoulder_Positions = new List<Transform>();
 
         buttonManager_3D = FindObjectOfType<buttonManager_3D>();
-    }
 
-    float lx,ly,lz,rx,ry,rz;
+        sumLx = sumLy = sumLz = sumRx = sumRy = sumRz = 0;
+    }
 
     void OnHumanBodiesChanged(ARHumanBodiesChangedEventArgs eventArgs)
     {
@@ -187,7 +190,6 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         }
     }
 
-    float sumLx = 0;
     public void checkShoulderAngles()
     {
         
@@ -198,9 +200,8 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
             lz = transformList.position.z;
 
             sumLx += lx;
-
-            Debug.Log("sumLx: " + sumLx);
-
+            sumLy += ly;
+            sumLz += lz;
         }
 
         foreach(var transformList in rightShoulder_Positions)//LEFT SHOULDER MEAN POSITION
@@ -208,13 +209,26 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
             rx = transformList.position.x;
             ry = transformList.position.y;
             rz = transformList.position.z;
+
+            sumRx = rx;
+            sumRy = ry;
+            sumRz = rz;
         }
 
         float meanLx = sumLx /  leftShoulder_Positions.Count;
-        Debug.Log($"meanLx = {meanLx} | {sumLx} / {leftShoulder_Positions.Count}");
+        float meanLy = sumLy / leftShoulder_Positions.Count;
+        float meanLz = sumLz / leftShoulder_Positions.Count;
 
-        Vector3 leftShoulderMeanPosition = new Vector3(meanLx,ly,lz);
-        Vector3 rightShoulderMeanPosition = new Vector3(rx,ry,rz);
+        float meanRx = sumRx /  leftShoulder_Positions.Count;
+        float meanRy = sumRy /  leftShoulder_Positions.Count;
+        float meanRz = sumRz /  leftShoulder_Positions.Count;
+
+        Debug.Log($"meanLx = {meanLx} | {sumLx} / {leftShoulder_Positions.Count}");
+        Debug.Log($"meanLy = {meanLy} | {sumLy} / {leftShoulder_Positions.Count}");
+        Debug.Log($"meanLz = {meanLz} | {sumLz} / {leftShoulder_Positions.Count}");
+
+        Vector3 leftShoulderMeanPosition = new Vector3(meanLx,meanLy,meanLz);
+        Vector3 rightShoulderMeanPosition = new Vector3(meanRx,meanRy,meanRz);
 
         //debugText.text = $"{leftShoulder_Positions.Count} |vidējais position [{meanPositionX}, {meanPositionY}, {meanPositionZ}]";
 
@@ -263,6 +277,8 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         rightShoulder_Positions.Clear();
 
         line.gameObject.SetActive(false);
+
+        sumLx = sumLy = sumLz = sumRx = sumRy = sumRz = 0;
 
         Debug.Log($"RESETTING MEAN VALUES - Before {initCount} | Now {leftShoulder_Positions.Count}");
     }
