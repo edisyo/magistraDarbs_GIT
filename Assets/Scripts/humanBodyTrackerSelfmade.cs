@@ -87,6 +87,11 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
         sumLx = sumLy = sumLz = sumRx = sumRy = sumRz = 0;
     }
 
+    private void Update() 
+    {
+        testingAngles();    
+    }
+
     void OnHumanBodiesChanged(ARHumanBodiesChangedEventArgs eventArgs)
     {
         BoneController boneController;
@@ -234,13 +239,13 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
 
         var direction = rightShoulderMeanPosition - leftShoulderMeanPosition;
         // var right = Vector3.right;
-        // var angle = Vector3.SignedAngle(direction,right, Vector3.up);
+        // var angle = Vector3.SignedAngle(direction,right, Vector3.up);//not working correctly
 
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        angle = 180 - angle;
+        // angle = 180 - angle;
 
-        if(angle > 180)
-            angle = 360 - angle;
+        // if(angle > 180)
+        //     angle = 360 - angle;
 
         line.gameObject.SetActive(true);
         line.SetPosition(0, leftShoulder.transform.position);
