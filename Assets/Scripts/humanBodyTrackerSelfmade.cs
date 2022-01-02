@@ -138,14 +138,14 @@ public class humanBodyTrackerSelfmade : MonoBehaviour
                 {
                     leftShoulder_Positions.Add(leftShoulder.transform);//GET teansforms for future calculations
                     rightShoulder_Positions.Add(rightShoulder.transform); 
-
-                    line.SetPosition(0, leftShoulder.transform.position);
-                    line.SetPosition(1, rightShoulder.transform.position);
                 }else
                 {
                     debugText.text = $"Meklē cilvēka ķermeni... \n";
                 }   
-            }   
+            }
+            Debug.Log("abc updating line pos...");
+            line.SetPosition(0, leftShoulder.transform.position);
+            line.SetPosition(1, rightShoulder.transform.position);
         }
 
         foreach (var humanBody in eventArgs.removed)
